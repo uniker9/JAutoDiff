@@ -1,0 +1,123 @@
+package nilgiri.math;
+
+public class DoubleComplex implements ComplexNumber<DoubleReal, DoubleComplex> {
+
+	private double m_re;
+	private double m_im;
+
+	public DoubleComplex() {
+		this(0.0, 0.0);
+	}
+
+	public DoubleComplex(double i_re, double i_im) {
+		m_re = i_re;
+		m_im = i_im;
+	}
+
+	public DoubleComplex(DoubleComplex i_cd) {
+		this(i_cd.m_re, i_cd.m_im);
+	}
+
+	public void assign(DoubleComplex i_cd) {
+		m_re = i_cd.m_re;
+		m_im = i_cd.m_im;
+	}
+
+	public DoubleReal re() {
+		return new DoubleReal(m_re);
+	}
+
+	public DoubleReal im() {
+		return new DoubleReal(m_im);
+	}
+
+	public double re_double() {
+		return m_re;
+	}
+
+	public double im_double() {
+		return m_im;
+	}
+
+	public double modulus() {
+		return Math.sqrt(absolute_square());
+	}
+
+	public double absolute_square() {
+		return m_re * m_re + m_im * m_im;
+	}
+
+	public String toString() {
+		return "(" + String.valueOf(m_re) + " + i " + String.valueOf(m_im)
+				+ ")";
+	}
+
+	public DoubleComplex newUnit() {
+		return new DoubleComplex(1.0, 0.0);
+	}
+
+	public DoubleComplex newZero() {
+		return new DoubleComplex(0.0, 0.0);
+	}
+
+	public DoubleComplex clone() {
+		return new DoubleComplex(m_re, m_im);
+	}
+
+	public DoubleComplex conjugate() {
+		return new DoubleComplex(m_re, -m_im);
+	}
+
+	public DoubleComplex inverse() {
+		double r2 = absolute_square();
+		return new DoubleComplex(m_re / r2, -m_re / r2);
+	}
+
+	public DoubleComplex negate() {
+		return new DoubleComplex(-m_re, -m_im);
+	}
+
+	public DoubleComplex plus(DoubleComplex i_cd) {
+		return new DoubleComplex(m_re + i_cd.m_re, m_im + i_cd.m_im);
+	}
+
+	public DoubleComplex minus(DoubleComplex i_cd) {
+		return new DoubleComplex(m_re - i_cd.m_re, m_im - i_cd.m_im);
+	}
+
+	public DoubleComplex multi(DoubleComplex i_cd) {
+		return new DoubleComplex((m_re * i_cd.m_re) - (m_im * i_cd.m_im),
+				(m_re * i_cd.m_im) + (m_im * i_cd.m_re));
+	}
+
+	public DoubleComplex divide(DoubleComplex i_cd) {
+		return this.multi(i_cd.conjugate()).divide(
+				i_cd.m_re * i_cd.m_re + i_cd.m_im * i_cd.m_im);
+	}
+
+	public DoubleComplex plus(double i_cd) {
+		return new DoubleComplex(m_re + i_cd, m_im);
+	}
+
+	public DoubleComplex minus(double i_cd) {
+		return new DoubleComplex(m_re - i_cd, m_im);
+	}
+
+	public DoubleComplex prod(double i_cd) {
+		return new DoubleComplex(m_re * i_cd, m_im * i_cd);
+	}
+
+	public DoubleComplex divide(double i_cd) {
+		return new DoubleComplex(m_re / i_cd, m_im / i_cd);
+	}
+
+	public DoubleComplex pow(int i_n) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public DoubleComplex multi(long i_n) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+}
