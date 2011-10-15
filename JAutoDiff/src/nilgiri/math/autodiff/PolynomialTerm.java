@@ -23,7 +23,7 @@ public class PolynomialTerm<X extends FieldNumber<X>> extends
 
 	@Override
 	public DifferentialFunction<X> diff(Variable<X> i_v) {
-		return (new PolynomialTerm<X>(m_scale - 1, arg(), m_exponent)).multi(arg()
+		return (new PolynomialTerm<X>(m_scale*m_exponent, arg(), m_exponent-1)).multi(arg()
 				.diff(i_v));
 	}
 
