@@ -7,7 +7,7 @@ import nilgiri.math.autodiff.operator.Plus;
 import nilgiri.math.autodiff.operator.Multi;
 
 public abstract class DifferentialFunction<X extends FieldNumber<X>> implements
-		DifferentialField<X, DifferentialFunction<X>> {
+		DifferentialField<Variable<X>, DifferentialFunction<X>> {
 
 	public DifferentialFunction() {
 	}

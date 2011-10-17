@@ -3,7 +3,7 @@ package nilgiri.math.autodiff;
 import nilgiri.math.FieldNumber;
 
 public class DifferentialMatrixFunction<X extends FieldNumber<X>> implements
-		DifferentialRing<X, DifferentialMatrixFunction<X>> {
+		DifferentialRing<Variable<X>, DifferentialMatrixFunction<X>> {
 
 	public DifferentialMatrixFunction<X> multi(DifferentialMatrixFunction<X> i_v) {
 		// TODO Auto-generated method stub
