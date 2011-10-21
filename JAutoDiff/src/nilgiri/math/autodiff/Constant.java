@@ -55,11 +55,11 @@ public class Constant<X extends FieldNumber<X>> extends DifferentialFunction<X> 
 	}
 
 	public Constant<X> multi(Constant<X> i_v) {
-		return new Constant<X>(m_x.multi(i_v.m_x), m_factory);
+		return new Constant<X>(m_x.mul(i_v.m_x), m_factory);
 	}
 
 	protected Constant<X> multiee(Constant<X> i_v) {
-		return new Constant<X>(i_v.m_x.multi(this.m_x), m_factory);
+		return new Constant<X>(i_v.m_x.mul(this.m_x), m_factory);
 	}
 
 	public Constant<X> inverse() {

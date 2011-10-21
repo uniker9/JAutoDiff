@@ -54,11 +54,11 @@ public class DoubleReal implements RealNumber<DoubleReal> {
 		return new DoubleReal(m_x - i_rd.m_x);
 	}
 
-	public DoubleReal multi(DoubleReal i_rd) {
+	public DoubleReal mul(DoubleReal i_rd) {
 		return new DoubleReal(m_x * i_rd.m_x);
 	}
 
-	public DoubleReal divide(DoubleReal i_rd) {
+	public DoubleReal div(DoubleReal i_rd) {
 		return new DoubleReal(m_x / i_rd.m_x);
 	}
 
@@ -88,7 +88,7 @@ public class DoubleReal implements RealNumber<DoubleReal> {
 		return new DoubleReal(Math.pow(m_x, i_n));
 	}
 
-	public DoubleReal multi(long i_n) {
+	public DoubleReal mul(long i_n) {
 		return new DoubleReal(m_x * i_n);
 	}
 

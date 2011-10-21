@@ -5,7 +5,7 @@ import nilgiri.math.FieldNumber;
 public class DifferentialMatrixFunction<X extends FieldNumber<X>> implements
 		DifferentialRing<Variable<X>, DifferentialMatrixFunction<X>> {
 
-	public DifferentialMatrixFunction<X> multi(DifferentialMatrixFunction<X> i_v) {
+	public DifferentialMatrixFunction<X> mul(DifferentialMatrixFunction<X> i_v) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -30,7 +30,7 @@ public class DifferentialMatrixFunction<X extends FieldNumber<X>> implements
 		return null;
 	}
 
-	public DifferentialMatrixFunction<X> multi(long i_n) {
+	public DifferentialMatrixFunction<X> mul(long i_n) {
 		// TODO Auto-generated method stub
 		return null;
 	}

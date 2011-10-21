@@ -41,7 +41,7 @@ public class RealFunctionFactory<X extends RealNumber<X>> {
 
 			@Override
 			public DifferentialFunction<X> diff(Variable<X> i_v) {
-				return (sin(arg()).multi(arg().diff(i_v))).negate();
+				return (sin(arg()).mul(arg().diff(i_v))).negate();
 			}
 
 			@Override
@@ -61,7 +61,7 @@ public class RealFunctionFactory<X extends RealNumber<X>> {
 
 			@Override
 			public DifferentialFunction<X> diff(Variable<X> i_v) {
-				return cos(arg()).multi(arg().diff(i_v));
+				return cos(arg()).mul(arg().diff(i_v));
 			}
 
 			@Override
@@ -85,7 +85,7 @@ public class RealFunctionFactory<X extends RealNumber<X>> {
 				// return new Inverse<X>( new Square<X>( cos(arg())
 				// )).multi(arg().diff(i_v));
 				// return pow(cos(arg()), -2).multi(arg().diff(i_v));
-				return (new PolynomialTerm<X>(1, cos(arg()), -2)).multi(arg()
+				return (new PolynomialTerm<X>(1, cos(arg()), -2)).mul(arg()
 						.diff(i_v));
 			}
 
@@ -105,7 +105,7 @@ public class RealFunctionFactory<X extends RealNumber<X>> {
 
 			@Override
 			public DifferentialFunction<X> diff(Variable<X> i_v) {
-				return exp(arg()).multi(arg().diff(i_v));
+				return exp(arg()).mul(arg().diff(i_v));
 			}
 
 			@Override
@@ -125,7 +125,7 @@ public class RealFunctionFactory<X extends RealNumber<X>> {
 
 			@Override
 			public DifferentialFunction<X> diff(Variable<X> i_v) {
-				return new Inverse<X>(arg()).multi(arg().diff(i_v));
+				return new Inverse<X>(arg()).mul(arg().diff(i_v));
 			}
 
 			@Override
@@ -167,8 +167,8 @@ public class RealFunctionFactory<X extends RealNumber<X>> {
 			public DifferentialFunction<X> diff(Variable<X> i_v) {
 				Constant<X> ym1 = RealFunctionFactory.this.constant(rarg()
 						.getValue().minus(m_RNFactory.one()));
-				return rarg().multi(RealFunctionFactory.this.pow(larg(), ym1))
-						.multi(larg().diff(i_v));
+				return rarg().mul(RealFunctionFactory.this.pow(larg(), ym1))
+						.mul(larg().diff(i_v));
 			}
 
 			@Override

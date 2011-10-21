@@ -85,13 +85,13 @@ public class DoubleComplex implements ComplexNumber<DoubleReal, DoubleComplex> {
 		return new DoubleComplex(m_re - i_cd.m_re, m_im - i_cd.m_im);
 	}
 
-	public DoubleComplex multi(DoubleComplex i_cd) {
+	public DoubleComplex mul(DoubleComplex i_cd) {
 		return new DoubleComplex((m_re * i_cd.m_re) - (m_im * i_cd.m_im),
 				(m_re * i_cd.m_im) + (m_im * i_cd.m_re));
 	}
 
-	public DoubleComplex divide(DoubleComplex i_cd) {
-		return this.multi(i_cd.conjugate()).divide(
+	public DoubleComplex div(DoubleComplex i_cd) {
+		return this.mul(i_cd.conjugate()).divide(
 				i_cd.m_re * i_cd.m_re + i_cd.m_im * i_cd.m_im);
 	}
 
@@ -116,7 +116,7 @@ public class DoubleComplex implements ComplexNumber<DoubleReal, DoubleComplex> {
 		return null;
 	}
 
-	public DoubleComplex multi(long i_n) {
+	public DoubleComplex mul(long i_n) {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -13,15 +13,15 @@ public class Zero<X extends FieldNumber<X>> extends Constant<X> {
 		return i_v;
 	}
 
-	protected DifferentialFunction<X> plusee(DifferentialFunction<X> i_v) {
+	protected DifferentialFunction<X> plused(DifferentialFunction<X> i_v) {
 		return i_v;
 	}
 
-	public Constant<X> multi(DifferentialFunction<X> i_v) {
+	public Constant<X> mul(DifferentialFunction<X> i_v) {
 		return this;
 	}
 
-	protected Constant<X> multiee(DifferentialFunction<X> i_v) {
+	protected Constant<X> muled(DifferentialFunction<X> i_v) {
 		return this;
 	}
 

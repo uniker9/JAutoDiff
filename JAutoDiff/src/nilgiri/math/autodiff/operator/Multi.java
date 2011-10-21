@@ -13,13 +13,13 @@ public class Multi<X extends FieldNumber<X>> extends AbstractOperator<X> {
 
 	@Override
 	public X getValue() {
-		return larg().getValue().multi(rarg().getValue());
+		return larg().getValue().mul(rarg().getValue());
 	}
 
 	@Override
 	public DifferentialFunction<X> diff(Variable<X> i_v1) {
 
-		return (larg().diff(i_v1).multi(rarg())).plus(larg().multi(rarg().diff(i_v1)));
+		return (larg().diff(i_v1).mul(rarg())).plus(larg().mul(rarg().diff(i_v1)));
 	}
 
 	@Override

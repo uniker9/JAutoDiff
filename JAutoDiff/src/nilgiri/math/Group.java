@@ -8,5 +8,5 @@ public interface Group<X> {
 
 	X minus(X i_v);
 
-	X multi(long i_n);
+	X mul(long i_n);
 }

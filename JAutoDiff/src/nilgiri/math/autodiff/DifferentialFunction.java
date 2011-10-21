@@ -19,10 +19,10 @@ public abstract class DifferentialFunction<X extends FieldNumber<X>> implements
 	public abstract DifferentialFunction<X> diff(Variable<X> i_v1);
 
 	public DifferentialFunction<X> plus(DifferentialFunction<X> i_v) {
-		return i_v.plusee(this);
+		return i_v.plused(this);
 	}
 
-	protected DifferentialFunction<X> plusee(DifferentialFunction<X> i_v) {
+	protected DifferentialFunction<X> plused(DifferentialFunction<X> i_v) {
 		return new Plus<X>(i_v, this);
 	}
 
@@ -30,16 +30,16 @@ public abstract class DifferentialFunction<X extends FieldNumber<X>> implements
 		return plus(i_v.negate());
 	}
 
-	public DifferentialFunction<X> multi(DifferentialFunction<X> i_v) {
-		return i_v.multiee(this);
+	public DifferentialFunction<X> mul(DifferentialFunction<X> i_v) {
+		return i_v.muled(this);
 	}
 
-	protected DifferentialFunction<X> multiee(DifferentialFunction<X> i_v) {
+	protected DifferentialFunction<X> muled(DifferentialFunction<X> i_v) {
 		return new Multi<X>(i_v, this);
 	}
 
-	public DifferentialFunction<X> divide(DifferentialFunction<X> i_v) {
-		return multi(i_v.inverse());
+	public DifferentialFunction<X> div(DifferentialFunction<X> i_v) {
+		return mul(i_v.inverse());
 	}
 
 	public DifferentialFunction<X> inverse() {
@@ -50,7 +50,7 @@ public abstract class DifferentialFunction<X extends FieldNumber<X>> implements
 		return new Negative<X>(this);
 	}
 
-	public DifferentialFunction<X> multi(long i_n) {
+	public DifferentialFunction<X> mul(long i_n) {
 		return new PolynomialTerm<X>(i_n, this, 1);
 	}
 
