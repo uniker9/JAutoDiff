@@ -117,7 +117,6 @@ public class DoubleComplex implements ComplexNumber<DoubleReal, DoubleComplex> {
 	}
 
 	public DoubleComplex mul(long i_n) {
-		// TODO Auto-generated method stub
-		return null;
+		return new DoubleComplex(m_re * i_n, m_im * i_n);
 	}
 }

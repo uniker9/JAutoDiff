@@ -27,31 +27,31 @@ public class DoubleRealFactory implements AbstractRealNumberFactory<DoubleReal> 
 	}
 
 	public DoubleReal cos(DoubleReal i_x) {
-		return new DoubleReal(Math.cos(i_x.value()));
+		return new DoubleReal(Math.cos(i_x.doubleValue()));
 	}
 
 	public DoubleReal sin(DoubleReal i_x) {
-		return new DoubleReal(Math.sin(i_x.value()));
+		return new DoubleReal(Math.sin(i_x.doubleValue()));
 	}
 
 	public DoubleReal tan(DoubleReal i_x) {
-		return new DoubleReal(Math.tan(i_x.value()));
+		return new DoubleReal(Math.tan(i_x.doubleValue()));
 	}
 
 	public DoubleReal exp(DoubleReal i_x) {
-		return new DoubleReal(Math.exp(i_x.value()));
+		return new DoubleReal(Math.exp(i_x.doubleValue()));
 	}
 
 	public DoubleReal log(DoubleReal i_x) {
-		return new DoubleReal(Math.log(i_x.value()));
+		return new DoubleReal(Math.log(i_x.doubleValue()));
 	}
 
 	public DoubleReal pow(DoubleReal i_x, int i_y) {
-		return new DoubleReal(Math.pow(i_x.value(), i_y));
+		return new DoubleReal(Math.pow(i_x.doubleValue(), i_y));
 	}
 
 	public DoubleReal pow(DoubleReal i_x, DoubleReal i_y) {
-		return new DoubleReal(Math.pow(i_x.value(), i_y.value()));
+		return new DoubleReal(Math.pow(i_x.doubleValue(), i_y.doubleValue()));
 	}
 
 }

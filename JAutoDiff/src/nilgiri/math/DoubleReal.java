@@ -20,7 +20,7 @@ public class DoubleReal implements RealNumber<DoubleReal> {
 		m_x = i_rd.m_x;
 	}
 
-	public double value() {
+	public double doubleValue() {
 		return m_x;
 	}
 
