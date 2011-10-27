@@ -16,9 +16,6 @@ using [generics](http://en.wikipedia.org/wiki/Generics_in_Java).
   one of the implementations of [interval arithmetic](http://en.wikipedia.org/wiki/Interval_arithmetic), 
   will be available soon.*
 
- ![Concept](./doc/classDiagram_concept_of_JAutoDiff.png)
-
-
 # Sample
 
 	final DoubleRealFactory RF = DoubleRealFactory.instance();
