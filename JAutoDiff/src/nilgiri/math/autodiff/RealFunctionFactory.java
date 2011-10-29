@@ -28,7 +28,7 @@ public class RealFunctionFactory<X extends RealNumber<X>> {
 		return new Zero<X>(m_RNFactory);
 	}
 
-	public DifferentialFunction<X> unit() {
+	public DifferentialFunction<X> one() {
 		return new One<X>(m_RNFactory);
 	}
 

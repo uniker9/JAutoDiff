@@ -26,7 +26,7 @@ public class ADOperatorTest {
 	Constant<DoubleReal> q = DF.constant(new DoubleReal(value_q));
 	
 	final DifferentialFunction<DoubleReal> ZERO = DF.zero();
-	final DifferentialFunction<DoubleReal> ONE = DF.unit();
+	final DifferentialFunction<DoubleReal> ONE = DF.one();
 	
 	
 	private void test(double i_expected, DifferentialFunction<DoubleReal> i_f){
