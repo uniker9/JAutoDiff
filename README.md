@@ -1,7 +1,7 @@
 # [JAutoDiff](http://uniker9.github.com/JAutoDiff/) : An Automatic Differentiation Library (Pure Java)
 
 [Automatic differentiation](http://en.wikipedia.org/wiki/Automatic_differentiation/) 
-is a tequnique to compute the derivatives of a function algebraically.  
+is a technique to compute the derivatives of a function algebraically.  
 There are many implementation in C/C++ (ex. 
 [FADBAD++](http://www.fadbad.com/fadbad.html), 
 [ADOL-C](http://projects.coin-or.org/ADOL-C), etc.), while are few in Java.
