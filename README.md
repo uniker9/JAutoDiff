@@ -1,4 +1,4 @@
-# JAutoDiff : An Automatic Differentiation Library (Pure Java)
+# [JAutoDiff](http://uniker9.github.com/JAutoDiff/) : An Automatic Differentiation Library (Pure Java)
 
 [Automatic differentiation](http://en.wikipedia.org/wiki/Automatic_differentiation/) 
 is a tequnique to compute the derivatives of a function algebraically.  
