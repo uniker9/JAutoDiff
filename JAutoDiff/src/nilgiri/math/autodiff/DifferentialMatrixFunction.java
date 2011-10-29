@@ -1,8 +1,8 @@
 package nilgiri.math.autodiff;
 
-import nilgiri.math.FieldNumber;
+import nilgiri.math.Field;
 
-public class DifferentialMatrixFunction<X extends FieldNumber<X>> implements
+public class DifferentialMatrixFunction<X extends Field<X>> implements
 		DifferentialRing<Variable<X>, DifferentialMatrixFunction<X>> {
 
 	public DifferentialMatrixFunction<X> mul(DifferentialMatrixFunction<X> i_v) {

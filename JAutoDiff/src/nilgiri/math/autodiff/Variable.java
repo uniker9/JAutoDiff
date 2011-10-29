@@ -1,9 +1,9 @@
 package nilgiri.math.autodiff;
 
 import nilgiri.math.AbstractFieldNumberFactory;
-import nilgiri.math.FieldNumber;
+import nilgiri.math.Field;
 
-public class Variable<X extends FieldNumber<X>> extends DifferentialFunction<X> {
+public class Variable<X extends Field<X>> extends DifferentialFunction<X> {
 
 	private X m_x;
 	private AbstractFieldNumberFactory<X> m_factory;

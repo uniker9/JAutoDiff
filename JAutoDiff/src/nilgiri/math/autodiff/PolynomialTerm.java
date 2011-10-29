@@ -1,8 +1,8 @@
 package nilgiri.math.autodiff;
 
-import nilgiri.math.FieldNumber;
+import nilgiri.math.Field;
 
-public class PolynomialTerm<X extends FieldNumber<X>> extends
+public class PolynomialTerm<X extends Field<X>> extends
 		AbstractUnaryFunction<X> {
 
 	protected long m_scale;

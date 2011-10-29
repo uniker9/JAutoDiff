@@ -1,8 +1,8 @@
 package nilgiri.math.autodiff;
 
-import nilgiri.math.FieldNumber;
+import nilgiri.math.Field;
 
-public class Negative<X extends FieldNumber<X>> extends
+public class Negative<X extends Field<X>> extends
 		AbstractUnaryFunction<X> {
 
 	public Negative(DifferentialFunction<X> i_v) {

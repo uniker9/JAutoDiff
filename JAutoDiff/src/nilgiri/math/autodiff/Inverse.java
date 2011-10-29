@@ -1,8 +1,8 @@
 package nilgiri.math.autodiff;
 
-import nilgiri.math.FieldNumber;
+import nilgiri.math.Field;
 
-public class Inverse<X extends FieldNumber<X>> extends AbstractUnaryFunction<X> {
+public class Inverse<X extends Field<X>> extends AbstractUnaryFunction<X> {
 
 	public Inverse(DifferentialFunction<X> i_v) {
 		super(i_v);

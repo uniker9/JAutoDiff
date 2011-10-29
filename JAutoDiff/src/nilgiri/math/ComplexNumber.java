@@ -1,7 +1,7 @@
 package nilgiri.math;
 
 public interface ComplexNumber<R extends RealNumber<R>, X> extends
-		FieldNumber<X> {
+		Field<X> {
 
 	X conjugate();
 

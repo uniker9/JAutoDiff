@@ -1,11 +1,11 @@
 package nilgiri.math.autodiff;
 
-import nilgiri.math.FieldNumber;
+import nilgiri.math.Field;
 
 //This class expresses a function with 2 arguments
 //exam. operators, power(x, 3.0), etc.
 
-public abstract class AbstractBinaryFunction<X extends FieldNumber<X>> extends
+public abstract class AbstractBinaryFunction<X extends Field<X>> extends
 		DifferentialFunction<X> {
 
 	private DifferentialFunction<X> m_x1;

@@ -1,14 +1,14 @@
 package nilgiri.math.autodiff;
 
 import nilgiri.math.AbstractFieldNumberFactory;
-import nilgiri.math.FieldNumber;
+import nilgiri.math.Field;
 
 // This class expresses constant number. 
 // This must be immutable.
 //For example,  0, 1, ... for DoubleReal
 //For example,  [0, 0], [1, 3],... for UInterval
 
-public class Constant<X extends FieldNumber<X>> extends DifferentialFunction<X> {
+public class Constant<X extends Field<X>> extends DifferentialFunction<X> {
 
 	private X m_x;
 	private AbstractFieldNumberFactory<X> m_factory;
