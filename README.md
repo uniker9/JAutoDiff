@@ -44,50 +44,51 @@ using [generics](http://en.wikipedia.org/wiki/Generics_in_Java).
 			Variable<DoubleReal> y = DF.variable("y", new DoubleReal(vy));
 			Constant<DoubleReal> q = DF.constant(new DoubleReal(vq));
 
-
+			//================================================================================
+			//Construct functions
+			//================================================================================
 			//h = q*x*( cos(x*y) + y )
 			DifferentialFunction<DoubleReal> h = q.mul(x).mul( DF.cos( x.mul(y) ).plus(y) );
+		
+			//ph/px = q*( cos(x*y) + y ) + q*x*( -sin(x*y)*y ) 
+			DifferentialFunction<DoubleReal> dhpx = h.diff(x);
+
+			//ph/py = q*x*( -sin(x*y)*x + 1.0) 
+			DifferentialFunction<DoubleReal> dhpy = h.diff(y);
+		
+			//p2h/px2 = q*( -sin(x*y)*y + y ) + q*( -sin(x*y)*y ) + q*x*( -cos(x*y)*y*y ) 
+			DifferentialFunction<DoubleReal> d2hpxpx = dhpx.diff(x);
+	
+			//p2h/pypx = q*( -sin(x*y)*x + 1.0 ) + q*x*( -sin(x*y) - cos(x*y)*y*y ) 
+			DifferentialFunction<DoubleReal> d2hpypx = dhpx.diff(y);
+
+			//================================================================================
+			//Test functions { h, ph/px, ph/py, p2h/px2, p2h/pypx }.
+			//================================================================================
 			test(vq*vx*( Math.cos(vx*vy) + vy ), h);
+			test(vq*( Math.cos(vx*vy) + vy ) + vq*vx*(-Math.sin(vx*vy)*vy ), dhpx);
+			test(vq*vx*( -Math.sin(vx*vy)*vx + 1.0 ), dhpy);
+			test(vq*( -Math.sin(vx*vy)*vy ) + vq*( -Math.sin(vx*vy)*vy ) + vq*vx*(-Math.cos(vx*vy)*vy*vy), d2hpxpx);
+			test(vq*( -Math.sin(vx*vy)*vx + 1.0 ) + vq*vx*( -Math.sin(vx*vy) - Math.cos(vx*vy)*vx*vy ), d2hpypx);
 
-			//dh/dx = q*( cos(x*y) + y ) + q*x*( -sin(x*y)*y ) 
-			DifferentialFunction<DoubleReal> dhdx = h.diff(x);
-			test(vq*( Math.cos(vx*vy) + vy ) + vq*vx*(-Math.sin(vx*vy)*vy ), dhdx);
-
-			//dh/dy = q*x*( -sin(x*y)*x + 1.0) 
-			DifferentialFunction<DoubleReal> dhdy = h.diff(y);
-			test(vq*vx*( -Math.sin(vx*vy)*vx + 1.0 ), dhdy);
-
-			//d2h/dxdx = q*( -sin(x*y)*y + y ) + q*( -sin(x*y)*y ) + q*x*( -cos(x*y)*y*y ) 
-			DifferentialFunction<DoubleReal> d2hdxdx = dhdx.diff(x);
-			test(vq*( -Math.sin(vx*vy)*vy ) + vq*( -Math.sin(vx*vy)*vy ) + vq*vx*(-Math.cos(vx*vy)*vy*vy), d2hdxdx);
-
-			//d2h/dydx = q*( -sin(x*y)*x + 1.0 ) + q*x*( -sin(x*y) - cos(x*y)*y*y ) 
-			DifferentialFunction<DoubleReal> d2hdydx = dhdx.diff(y);
-			test(vq*( -Math.sin(vx*vy)*vx + 1.0 ) + vq*vx*( -Math.sin(vx*vy) - Math.cos(vx*vy)*vx*vy ), d2hdydx);
-
-
-			//Reset Value
+			//================================================================================
+			//Change values of the variables.
+			//================================================================================
 			vx = 4.0;
 			vy = 7.0;
 			x.set(new DoubleReal(vx));
 			y.set(new DoubleReal(vy));
 
-			// No reconstruction of the functions is necessary to get values of the functions for new values of variables.
-		
-			//h
+			//================================================================================
+			//Re-Test functions { h, ph/px, ph/py, p2h/px2, p2h/pypx }.
+			//================================================================================
+			//No reconstruction of the functions is necessary 
+			//to get values of the functions for new values of variables.
 			test(vq*vx*( Math.cos(vx*vy) + vy ), h);
-	
-			//dh/dx = q*( cos(x*y) + y ) + q*x*( -sin(x*y)*y ) 
-			test(vq*( Math.cos(vx*vy) + vy ) + vq*vx*(-Math.sin(vx*vy)*vy ), dhdx);
-
-			//dh/dy = q*x*( -sin(x*y)*x + 1.0) 
-			test(vq*vx*( -Math.sin(vx*vy)*vx + 1.0 ), dhdy);
-
-			//d2h/dxdx = q*( -sin(x*y)*y + y ) + q*( -sin(x*y)*y ) + q*x*( -cos(x*y)*y*y ) 
-			test(vq*( -Math.sin(vx*vy)*vy ) + vq*( -Math.sin(vx*vy)*vy ) + vq*vx*(-Math.cos(vx*vy)*vy*vy), d2hdxdx);
-
-			//d2h/dydx = q*( -sin(x*y)*x + 1.0 ) + q*x*( -sin(x*y) - cos(x*y)*y*y ) 
-			test(vq*( -Math.sin(vx*vy)*vx + 1.0 ) + vq*vx*( -Math.sin(vx*vy) - Math.cos(vx*vy)*vx*vy ), d2hdydx);
+			test(vq*( Math.cos(vx*vy) + vy ) + vq*vx*(-Math.sin(vx*vy)*vy ), dhpx);
+			test(vq*vx*( -Math.sin(vx*vy)*vx + 1.0 ), dhpy);
+			test(vq*( -Math.sin(vx*vy)*vy ) + vq*( -Math.sin(vx*vy)*vy ) + vq*vx*(-Math.cos(vx*vy)*vy*vy), d2hpxpx);
+			test(vq*( -Math.sin(vx*vy)*vx + 1.0 ) + vq*vx*( -Math.sin(vx*vy) - Math.cos(vx*vy)*vx*vy ), d2hpypx);
 		}
 	}
 
