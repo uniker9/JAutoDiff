@@ -1,6 +1,6 @@
 package nilgiri.math.autodiff;
 
-import nilgiri.math.AbstractFieldNumberFactory;
+import nilgiri.math.AbstractFieldFactory;
 import nilgiri.math.Field;
 
 // This class expresses constant number. 
@@ -11,9 +11,9 @@ import nilgiri.math.Field;
 public class Constant<X extends Field<X>> extends DifferentialFunction<X> {
 
 	private X m_x;
-	private AbstractFieldNumberFactory<X> m_factory;
+	private AbstractFieldFactory<X> m_factory;
 
-	public Constant(X i_v, AbstractFieldNumberFactory<X> i_factory) {
+	public Constant(X i_v, AbstractFieldFactory<X> i_factory) {
 		if (i_v != null && i_factory != null) {
 			m_x = i_v;
 			m_factory = i_factory;
@@ -22,7 +22,7 @@ public class Constant<X extends Field<X>> extends DifferentialFunction<X> {
 		}
 	}
 
-	protected AbstractFieldNumberFactory<X> factory() {
+	protected AbstractFieldFactory<X> factory() {
 		return m_factory;
 	}
 

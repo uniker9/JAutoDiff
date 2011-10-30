@@ -1,7 +1,7 @@
 package nilgiri.math;
 
 public class DoubleComplexFactory implements
-		AbstractFieldNumberFactory<DoubleComplex> {
+		AbstractFieldFactory<DoubleComplex> {
 
 	private static final DoubleComplexFactory m_INSTANCE = new DoubleComplexFactory();
 

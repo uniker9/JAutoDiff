@@ -1,11 +1,11 @@
 package nilgiri.math.autodiff;
 
-import nilgiri.math.AbstractFieldNumberFactory;
+import nilgiri.math.AbstractFieldFactory;
 import nilgiri.math.Field;
 
 public class Zero<X extends Field<X>> extends Constant<X> {
 
-	public Zero(AbstractFieldNumberFactory<X> i_RNFactory) {
+	public Zero(AbstractFieldFactory<X> i_RNFactory) {
 		super(i_RNFactory.zero(), i_RNFactory);
 	}
 

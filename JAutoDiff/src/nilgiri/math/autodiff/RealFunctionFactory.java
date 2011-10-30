@@ -1,10 +1,13 @@
 package nilgiri.math.autodiff;
 
+import nilgiri.math.AbstractFieldFactory;
 import nilgiri.math.AbstractRealNumberFactory;
 
 import nilgiri.math.RealNumber;
 
-public class RealFunctionFactory<X extends RealNumber<X>> {
+public class RealFunctionFactory<X extends RealNumber<X>> implements 
+	AbstractFieldFactory<DifferentialFunction<X>>{
+	
 	protected AbstractRealNumberFactory<X> m_RNFactory;
 
 	public RealFunctionFactory(AbstractRealNumberFactory<X> i_RNFactory) {

@@ -1,7 +1,7 @@
 package nilgiri.math;
 
 public interface AbstractRealNumberFactory<X extends RealNumber<X>> extends
-		AbstractFieldNumberFactory<X> {
+		AbstractFieldFactory<X> {
 
 	X cos(X i_x);
 
