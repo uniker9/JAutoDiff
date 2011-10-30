@@ -1,13 +1,12 @@
 package nilgiri.math.autodiff;
 
 import nilgiri.math.Field;
-import nilgiri.math.autodiff.DifferentialField;
 
 import nilgiri.math.autodiff.operator.Plus;
 import nilgiri.math.autodiff.operator.Multi;
 
 public abstract class DifferentialFunction<X extends Field<X>> implements
-		DifferentialField<Variable<X>, DifferentialFunction<X>> {
+		Field<DifferentialFunction<X>>, Differential<Variable<X>, DifferentialFunction<X>> {
 
 	public DifferentialFunction() {
 	}
