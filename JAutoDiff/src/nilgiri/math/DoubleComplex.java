@@ -52,13 +52,6 @@ public class DoubleComplex implements ComplexNumber<DoubleReal, DoubleComplex> {
 				+ ")";
 	}
 
-	public DoubleComplex newUnit() {
-		return new DoubleComplex(1.0, 0.0);
-	}
-
-	public DoubleComplex newZero() {
-		return new DoubleComplex(0.0, 0.0);
-	}
 
 	public DoubleComplex clone() {
 		return new DoubleComplex(m_re, m_im);

@@ -5,13 +5,15 @@ import junit.framework.Assert;
 
 import nilgiri.math.DoubleReal;
 import nilgiri.math.DoubleRealFactory;
+import nilgiri.math.DoubleRealFunctionFactory;
 
 import org.junit.Test;
 
 
 public class ADOperatorTest {
 	DoubleRealFactory RF = DoubleRealFactory.instance();
-	RealFunctionFactory<DoubleReal> DF = new RealFunctionFactory<DoubleReal>(RF);
+	DoubleRealFunctionFactory RFF = DoubleRealFunctionFactory.instance();
+	DifferentialRealFunctionFactory<DoubleReal> DF = new DifferentialRealFunctionFactory<DoubleReal>(RF, RFF);
 
 	
 	double value_x = 3.0;

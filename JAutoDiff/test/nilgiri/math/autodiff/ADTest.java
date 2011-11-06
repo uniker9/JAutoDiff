@@ -2,13 +2,16 @@ package nilgiri.math.autodiff;
 
 import org.junit.Test;
 
+
 import junit.framework.Assert;
 import nilgiri.math.DoubleReal;
 import nilgiri.math.DoubleRealFactory;
+import nilgiri.math.DoubleRealFunctionFactory;
 
 public class ADTest {
-	private final DoubleRealFactory RF = DoubleRealFactory.instance();
-	private final RealFunctionFactory<DoubleReal> DF = new RealFunctionFactory<DoubleReal>(RF);
+	private final DoubleRealFactory RNFactory = DoubleRealFactory.instance();
+	private final DoubleRealFunctionFactory RFFactory = DoubleRealFunctionFactory.instance();
+	private final DifferentialRealFunctionFactory<DoubleReal> DFFactory = new DifferentialRealFunctionFactory<DoubleReal>(RNFactory, RFFactory);
 
 	private void test(double i_expected, DifferentialFunction<DoubleReal> i_f){
 		String func_str = i_f.toString();
@@ -24,15 +27,15 @@ public class ADTest {
 		double vy = 5.0;
 		double vq = 8.0;
 
-		Variable<DoubleReal> x = DF.variable("x", new DoubleReal(vx));
-		Variable<DoubleReal> y = DF.variable("y", new DoubleReal(vy));
-		Constant<DoubleReal> q = DF.constant(new DoubleReal(vq));
+		Variable<DoubleReal> x = DFFactory.variable("x", new DoubleReal(vx));
+		Variable<DoubleReal> y = DFFactory.variable("y", new DoubleReal(vy));
+		Constant<DoubleReal> q = DFFactory.constant(new DoubleReal(vq));
 
 		//================================================================================
 		//Construct functions
 		//================================================================================
 		//h = q*x*( cos(x*y) + y )
-		DifferentialFunction<DoubleReal> h = q.mul(x).mul( DF.cos( x.mul(y) ).plus(y) );
+		DifferentialFunction<DoubleReal> h = q.mul(x).mul( DFFactory.cos( x.mul(y) ).plus(y) );
 		
 		//ph/px = q*( cos(x*y) + y ) + q*x*( -sin(x*y)*y ) 
 		DifferentialFunction<DoubleReal> dhpx = h.diff(x);

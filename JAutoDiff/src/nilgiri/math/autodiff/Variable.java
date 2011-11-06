@@ -3,13 +3,19 @@ package nilgiri.math.autodiff;
 import nilgiri.math.AbstractFieldFactory;
 import nilgiri.math.Field;
 
+/** Variables in X forms a field.
+ * @author uniker9
+ *
+ * @param <X> A set forms a field.
+ */
 public class Variable<X extends Field<X>> extends DifferentialFunction<X> {
 
 	private X m_x;
 	private AbstractFieldFactory<X> m_factory;
 	private String m_name;
 
-	public Variable(String i_name, X i_v,
+
+	protected Variable(String i_name, X i_v,
 			AbstractFieldFactory<X> i_factory) {
 		setName(i_name);
 		if (i_v != null && i_factory != null) {
@@ -19,11 +25,11 @@ public class Variable<X extends Field<X>> extends DifferentialFunction<X> {
 			throw new IllegalArgumentException("Input not null value.");
 		}
 	}
-	
+
 	protected AbstractFieldFactory<X> factory() {
 		return m_factory;
 	}
-	
+
 	private void setName(String i_name) {
 		if (i_name != null) {
 			m_name = i_name;// new String(i_name);
@@ -32,6 +38,16 @@ public class Variable<X extends Field<X>> extends DifferentialFunction<X> {
 		}
 	}
 
+	/** Returns the name of this variable. 
+	 * @return the name.
+	 */
+	public String getName() {
+		return m_name;
+	}
+
+	/** Set this value to i_v.
+	 * @param i_v
+	 */
 	public void set(X i_v) {
 		if (i_v != null) {
 			m_x = i_v;
@@ -40,13 +56,17 @@ public class Variable<X extends Field<X>> extends DifferentialFunction<X> {
 		}
 	}
 
+	@Override
+	public boolean isVariable() {
+		return true;
+	}
+
+	@Override
 	public X getValue() {
-		// return m_x.clone();
 		return m_x;
 	}
-	public String getName() {
-		return m_name;
-	}
+
+	@Override
 	public Constant<X> diff(Variable<X> i_v) {
 		return (this == i_v) ? new One<X>(m_factory) : new Zero<X>(m_factory);
 	}
@@ -56,8 +76,5 @@ public class Variable<X extends Field<X>> extends DifferentialFunction<X> {
 		return getName();
 	}
 
-	public boolean isVariable() {
-		return true;
-	}
 
 }

@@ -2,19 +2,43 @@ package nilgiri.math.autodiff;
 
 import nilgiri.math.Field;
 
-import nilgiri.math.autodiff.operator.Plus;
-import nilgiri.math.autodiff.operator.Multi;
 
+/** A differential function whose value are in X.
+ * Partial derivatives of an object f of DifferentialFunction&lt<X&rt>
+ * are given by f.diff(x) where x is an object of Variable&lt<X&rt>.
+ * 
+ * @author uniker9
+ *
+ * @param <X> A set forms a field.
+ */
 public abstract class DifferentialFunction<X extends Field<X>> implements
 		Field<DifferentialFunction<X>>, Differential<Variable<X>, DifferentialFunction<X>> {
 
-	public DifferentialFunction() {
+	protected DifferentialFunction() {
 	}
 
+	/** Returns the value in X of the function.
+	 * @return the value.
+	 */
 	public abstract X getValue();
 
 	public abstract String toString();
 
+	/** Returns true if this is a constant.
+	 * @return true if this is a constant.
+	 */
+	public boolean isConstant() {
+		return false;
+	}
+	
+	/** Returns true if this is a variable.
+	 * @return true if this is a variable.
+	 */
+	public boolean isVariable() {
+		return false;
+	}
+	
+	
 	public abstract DifferentialFunction<X> diff(Variable<X> i_v1);
 
 	public DifferentialFunction<X> plus(DifferentialFunction<X> i_v) {
@@ -22,7 +46,7 @@ public abstract class DifferentialFunction<X extends Field<X>> implements
 	}
 
 	protected DifferentialFunction<X> plused(DifferentialFunction<X> i_v) {
-		return new Plus<X>(i_v, this);
+		return new Sum<X>(i_v, this);
 	}
 
 	public DifferentialFunction<X> minus(DifferentialFunction<X> i_v) {
@@ -34,7 +58,7 @@ public abstract class DifferentialFunction<X extends Field<X>> implements
 	}
 
 	protected DifferentialFunction<X> muled(DifferentialFunction<X> i_v) {
-		return new Multi<X>(i_v, this);
+		return new Product<X>(i_v, this);
 	}
 
 	public DifferentialFunction<X> div(DifferentialFunction<X> i_v) {
@@ -56,4 +80,6 @@ public abstract class DifferentialFunction<X extends Field<X>> implements
 	public DifferentialFunction<X> pow(int i_n) {
 		return new PolynomialTerm<X>(1L, this, i_n);
 	}
+	
+
 }

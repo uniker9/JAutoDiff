@@ -2,15 +2,21 @@ package nilgiri.math.autodiff;
 
 import nilgiri.math.Field;
 
-//This class expresses a function with 2 arguments
-//exam. operators, power(x, 3.0), etc.
-
+/** An abstract function requires two arguments in X.
+ * @author uniker9
+ *
+ * @param <X> A set forms a field.
+ */
 public abstract class AbstractBinaryFunction<X extends Field<X>> extends
 		DifferentialFunction<X> {
 
 	private DifferentialFunction<X> m_x1;
 	private DifferentialFunction<X> m_x2;
 
+	/** Constructs a new AbstractBinaryFunction.
+	 * @param i_v1 the 1st (left) argument.
+	 * @param i_v2 the 2nd (right) argument.
+	 */
 	public AbstractBinaryFunction(DifferentialFunction<X> i_v1,
 			DifferentialFunction<X> i_v2) {
 
@@ -22,9 +28,15 @@ public abstract class AbstractBinaryFunction<X extends Field<X>> extends
 		}
 	}
 	
+	/** Returns the 1st (left) argument of this function.
+	 * @return the 1st (left) argument.
+	 */
 	public DifferentialFunction<X> larg() {
 		return m_x1;
 	}
+	/** Returns the 2nd (right) argument of this function.
+	 * @return the 2nd (right) argument.
+	 */
 	public DifferentialFunction<X> rarg() {
 		return m_x2;
 	}

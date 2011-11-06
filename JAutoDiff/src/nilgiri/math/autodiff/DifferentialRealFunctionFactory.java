@@ -1,18 +1,25 @@
 package nilgiri.math.autodiff;
 
 import nilgiri.math.AbstractFieldFactory;
-import nilgiri.math.AbstractRealNumberFactory;
+import nilgiri.math.AbstractRealFunctionFactory;
 
 import nilgiri.math.RealNumber;
 
-public class RealFunctionFactory<X extends RealNumber<X>> implements 
-	AbstractFieldFactory<DifferentialFunction<X>>{
+public class DifferentialRealFunctionFactory<X extends RealNumber<X>> implements 
+	AbstractFieldFactory<DifferentialFunction<X>> {
 	
-	protected AbstractRealNumberFactory<X> m_RNFactory;
+	protected AbstractFieldFactory<X> m_RNFactory;
+	protected AbstractRealFunctionFactory<X> m_RFFactory;	
 
-	public RealFunctionFactory(AbstractRealNumberFactory<X> i_RNFactory) {
-		if (i_RNFactory != null) {
+	/**
+	 * @param i_RNFactory
+	 * @param i_RFFactory
+	 */
+	public DifferentialRealFunctionFactory(AbstractFieldFactory<X> i_RNFactory,
+			AbstractRealFunctionFactory<X> i_RFFactory) {
+		if (i_RNFactory != null && i_RFFactory != null) {
 			m_RNFactory = i_RNFactory;
+			m_RFFactory = i_RFFactory;
 		} else {
 			throw new IllegalArgumentException("Input not null value.");
 		}
@@ -39,7 +46,7 @@ public class RealFunctionFactory<X extends RealNumber<X>> implements
 		return new AbstractUnaryFunction<X>(i_x) {
 			@Override
 			public X getValue() {
-				return m_RNFactory.cos(arg().getValue());
+				return m_RFFactory.cos(arg().getValue());
 			}
 
 			@Override
@@ -59,7 +66,7 @@ public class RealFunctionFactory<X extends RealNumber<X>> implements
 		return new AbstractUnaryFunction<X>(i_x) {
 			@Override
 			public X getValue() {
-				return m_RNFactory.sin(arg().getValue());
+				return m_RFFactory.sin(arg().getValue());
 			}
 
 			@Override
@@ -78,7 +85,7 @@ public class RealFunctionFactory<X extends RealNumber<X>> implements
 		return new AbstractUnaryFunction<X>(i_x) {
 			@Override
 			public X getValue() {
-				return m_RNFactory.tan(arg().getValue());
+				return m_RFFactory.tan(arg().getValue());
 			}
 
 			@Override
@@ -103,7 +110,7 @@ public class RealFunctionFactory<X extends RealNumber<X>> implements
 		return new AbstractUnaryFunction<X>(i_x) {
 			@Override
 			public X getValue() {
-				return m_RNFactory.exp(arg().getValue());
+				return m_RFFactory.exp(arg().getValue());
 			}
 
 			@Override
@@ -123,7 +130,7 @@ public class RealFunctionFactory<X extends RealNumber<X>> implements
 
 			@Override
 			public X getValue() {
-				return m_RNFactory.log(arg().getValue());
+				return m_RFFactory.log(arg().getValue());
 			}
 
 			@Override
@@ -163,14 +170,14 @@ public class RealFunctionFactory<X extends RealNumber<X>> implements
 
 			@Override
 			public X getValue() {
-				return m_RNFactory.pow(larg().getValue(), rarg().getValue());
+				return m_RFFactory.pow(larg().getValue(), rarg().getValue());
 			}
 
 			@Override
 			public DifferentialFunction<X> diff(Variable<X> i_v) {
-				Constant<X> ym1 = RealFunctionFactory.this.constant(rarg()
+				Constant<X> ym1 = DifferentialRealFunctionFactory.this.constant(rarg()
 						.getValue().minus(m_RNFactory.one()));
-				return rarg().mul(RealFunctionFactory.this.pow(larg(), ym1))
+				return rarg().mul(DifferentialRealFunctionFactory.this.pow(larg(), ym1))
 						.mul(larg().diff(i_v));
 			}
 

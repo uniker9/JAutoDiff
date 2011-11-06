@@ -1,7 +1,8 @@
 package nilgiri.math;
 
 public class DoubleReal implements RealNumber<DoubleReal> {
-
+	//immutable
+	
 	private double m_x;
 
 	public DoubleReal() {

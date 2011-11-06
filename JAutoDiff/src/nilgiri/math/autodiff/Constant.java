@@ -1,19 +1,22 @@
 package nilgiri.math.autodiff;
 
+
 import nilgiri.math.AbstractFieldFactory;
 import nilgiri.math.Field;
 
-// This class expresses constant number. 
-// This must be immutable.
-//For example,  0, 1, ... for DoubleReal
-//For example,  [0, 0], [1, 3],... for UInterval
-
+/** A constant in X forms a field.
+ * Computations are done correctly 
+ * while objects of this class and those values are immutable.
+ * @author uniker9
+ *
+ * @param <X> A set forms a field.
+ */
 public class Constant<X extends Field<X>> extends DifferentialFunction<X> {
 
 	private X m_x;
 	private AbstractFieldFactory<X> m_factory;
 
-	public Constant(X i_v, AbstractFieldFactory<X> i_factory) {
+	protected Constant(X i_v, AbstractFieldFactory<X> i_factory) {
 		if (i_v != null && i_factory != null) {
 			m_x = i_v;
 			m_factory = i_factory;
@@ -21,53 +24,59 @@ public class Constant<X extends Field<X>> extends DifferentialFunction<X> {
 			throw new IllegalArgumentException("Input not null value.");
 		}
 	}
-
+	
+	
 	protected AbstractFieldFactory<X> factory() {
 		return m_factory;
 	}
 
-	// public Constant<X> like(X i_v){
-	// return new Constant<X>(i_v, m_RNFactory);
-	// }
-
-	public X getValue() {
-		return m_x;
-	}
-
-	public DifferentialFunction<X> diff(Variable<X> i_v) {
-		return new Zero<X>(m_factory);
-	}
-
-	public String toString() {
-		return getValue().toString();
-	}
-
+	@Override
 	public boolean isConstant() {
 		return true;
 	}
 
-	public Constant<X> plus(Constant<X> i_v) {
-		return new Constant<X>(m_x.plus(i_v.m_x), m_factory);
+	@Override
+	public X getValue() {
+		return m_x;
 	}
 
-	protected Constant<X> plusee(Constant<X> i_v) {
-		return new Constant<X>(i_v.m_x.plus(this.m_x), m_factory);
+	@Override
+	public DifferentialFunction<X> diff(Variable<X> i_v) {
+		return new Zero<X>(m_factory);
 	}
 
-	public Constant<X> multi(Constant<X> i_v) {
-		return new Constant<X>(m_x.mul(i_v.m_x), m_factory);
+	@Override
+	public String toString() {
+		return getValue().toString();
 	}
-
-	protected Constant<X> multiee(Constant<X> i_v) {
-		return new Constant<X>(i_v.m_x.mul(this.m_x), m_factory);
+	
+	@Override
+	protected DifferentialFunction<X> plused(DifferentialFunction<X> i_v) {
+		return i_v.isConstant() ? new Constant<X>(i_v.getValue().plus(this.m_x), m_factory) : super.plused(i_v);
 	}
+	
+	@Override
+	protected DifferentialFunction<X> muled(DifferentialFunction<X> i_v) {
+		return i_v.isConstant() ? new Constant<X>(i_v.getValue().mul(this.m_x), m_factory) : super.muled(i_v);
+	} 
 
-	public Constant<X> inverse() {
+	public DifferentialFunction<X> inverse() {
+	//public Constant<X> inverse() {
 		return new Constant<X>(m_x.inverse(), m_factory);
 	}
 
-	public Constant<X> negate() {
+	public DifferentialFunction<X> negate() {
+	//public Constant<X> negate() {
 		return new Constant<X>(m_x.negate(), m_factory);
+	}
+
+	//This class must be immutable.
+	//set and assign must not be implemented.  
+	@SuppressWarnings("unused")
+	private final void set(X i_x){
+	}
+	@SuppressWarnings("unused")
+	private final void assign(X i_x){
 	}
 
 }

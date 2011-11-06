@@ -1,9 +1,16 @@
 package nilgiri.math.autodiff;
 
-import nilgiri.math.Field;
-import nilgiri.math.Group;
+import nilgiri.math.CommutativeGroup;
 
+import nilgiri.math.Field;
+
+
+/**
+ * @author uniker9
+ *
+ * @param <X> A set forms a field.
+ */
 public interface DifferentialVectorFunction<X extends Field<X>> extends
-		Group<DifferentialVectorFunction<X>>, Differential<Variable<X>, DifferentialVectorFunction<X>> {
+		CommutativeGroup<DifferentialVectorFunction<X>>, Differential<Variable<X>, DifferentialVectorFunction<X>> {
 	
 }
