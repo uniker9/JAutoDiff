@@ -3,7 +3,7 @@ package nilgiri.math.autodiff;
 import nilgiri.math.Field;
 
 
-/** A product of two objects of DifferentialFunction&lt<X&rt>.
+/** A product of two objects of DifferentialFunction&ltX&rt.
  * @author uniker9
  *
  * @param <X> A set forms a field.

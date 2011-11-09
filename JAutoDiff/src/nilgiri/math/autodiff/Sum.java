@@ -3,7 +3,7 @@ package nilgiri.math.autodiff;
 import nilgiri.math.Field;
 
 
-/** A sum of two objects of DifferentialFunction&lt<X&rt>.
+/** A sum of two objects of DifferentialFunction&ltX&gt.
  * @author uniker9
  *
  * @param <X> A set forms a field.

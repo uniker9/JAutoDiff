@@ -4,8 +4,8 @@ import nilgiri.math.Field;
 
 
 /** A differential function whose value are in X.
- * Partial derivatives of an object f of DifferentialFunction&lt<X&rt>
- * are given by f.diff(x) where x is an object of Variable&lt<X&rt>.
+ * Partial derivatives of an object f of DifferentialFunction&ltX&gt
+ * are given by f.diff(x) where x is an object of Variable&ltX&gt.
  * 
  * @author uniker9
  *

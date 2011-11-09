@@ -2,7 +2,7 @@ package nilgiri.math.autodiff;
 
 
 
-/** This interface Differential&ltX, D&rt indicates objects implements this are differential with respect to V and the derivatives are of D.  
+/** This interface Differential&ltX, D&gt indicates objects implements this are differential with respect to V and the derivatives are of D.  
  * @author uniker9
  *
  * @param <V>

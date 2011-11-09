@@ -1,6 +1,6 @@
 package nilgiri.math;
 
-/** A class X implements the Group&ltX&rt interface indicates that X has properties of being a group.
+/** A class X implements the Group&ltX&gt interface indicates that X has properties of being a group.
  * @author uniker9
  *
  * @param <X> A set forms a group. 

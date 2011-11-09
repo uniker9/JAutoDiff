@@ -1,7 +1,7 @@
 package nilgiri.math;
 
-/** Let R denote a class implements RealNumber&ltR&rt. 
- * A class X implements the ComplexNumber&ltR, X&rt interface indicates that 
+/** Let R denote a class implements RealNumber&ltR&gt. 
+ * A class X implements the ComplexNumber&ltR, X&gt interface indicates that 
  * X is a complex number whose real and imaginary parts are of R.d
  * @author uniker9
  *

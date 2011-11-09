@@ -1,6 +1,6 @@
 package nilgiri.math;
 
-/** A class X implements the Field&ltX&rt interface indicates that X has properties of being a field.
+/** A class X implements the Field&ltX&gt interface indicates that X has properties of being a field.
  * @author uniker9
  *
  * @param <X> A set forms a field.
