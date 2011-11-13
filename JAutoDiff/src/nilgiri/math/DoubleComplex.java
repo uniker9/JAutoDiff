@@ -1,10 +1,5 @@
 package nilgiri.math;
 
-import com.sun.org.apache.xerces.internal.impl.dv.xs.DecimalDV;
-import com.sun.org.apache.xpath.internal.operations.Number;
-
-import sun.nio.cs.ext.DoubleByte;
-import sun.tools.tree.BinaryArithmeticExpression;
 
 public class DoubleComplex implements ComplexNumber<DoubleReal, DoubleComplex>, Cloneable {
 
