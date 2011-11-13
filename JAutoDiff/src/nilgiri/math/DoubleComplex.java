@@ -1,6 +1,12 @@
 package nilgiri.math;
 
-public class DoubleComplex implements ComplexNumber<DoubleReal, DoubleComplex> {
+import com.sun.org.apache.xerces.internal.impl.dv.xs.DecimalDV;
+import com.sun.org.apache.xpath.internal.operations.Number;
+
+import sun.nio.cs.ext.DoubleByte;
+import sun.tools.tree.BinaryArithmeticExpression;
+
+public class DoubleComplex implements ComplexNumber<DoubleReal, DoubleComplex>, Cloneable {
 
 	private double m_re;
 	private double m_im;
@@ -13,16 +19,7 @@ public class DoubleComplex implements ComplexNumber<DoubleReal, DoubleComplex> {
 		m_re = i_re;
 		m_im = i_im;
 	}
-
-	public DoubleComplex(DoubleComplex i_cd) {
-		this(i_cd.m_re, i_cd.m_im);
-	}
-
-	public void assign(DoubleComplex i_cd) {
-		m_re = i_cd.m_re;
-		m_im = i_cd.m_im;
-	}
-
+	
 	public DoubleReal re() {
 		return new DoubleReal(m_re);
 	}
@@ -53,7 +50,7 @@ public class DoubleComplex implements ComplexNumber<DoubleReal, DoubleComplex> {
 	}
 
 
-	public DoubleComplex clone() {
+	public Object clone() {
 		return new DoubleComplex(m_re, m_im);
 	}
 

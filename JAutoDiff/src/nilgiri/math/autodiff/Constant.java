@@ -1,7 +1,7 @@
 package nilgiri.math.autodiff;
 
 
-import nilgiri.math.AbstractFieldFactory;
+import nilgiri.math.AbstractIdentityFactory;
 import nilgiri.math.Field;
 
 /** A constant in X forms a field.
@@ -14,9 +14,9 @@ import nilgiri.math.Field;
 public class Constant<X extends Field<X>> extends DifferentialFunction<X> {
 
 	private X m_x;
-	private AbstractFieldFactory<X> m_factory;
+	private AbstractIdentityFactory<X> m_factory;
 
-	protected Constant(X i_v, AbstractFieldFactory<X> i_factory) {
+	protected Constant(X i_v, AbstractIdentityFactory<X> i_factory) {
 		if (i_v != null && i_factory != null) {
 			m_x = i_v;
 			m_factory = i_factory;
@@ -26,7 +26,7 @@ public class Constant<X extends Field<X>> extends DifferentialFunction<X> {
 	}
 	
 	
-	protected AbstractFieldFactory<X> factory() {
+	protected AbstractIdentityFactory<X> factory() {
 		return m_factory;
 	}
 

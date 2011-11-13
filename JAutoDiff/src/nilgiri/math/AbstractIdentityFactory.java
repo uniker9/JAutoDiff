@@ -5,7 +5,7 @@ package nilgiri.math;
  *
  * @param <X> A set forms a field.
  */
-public interface AbstractFieldFactory<X extends Field<X>> {
+public interface AbstractIdentityFactory<X> {
 
 	/** Returns the zero element (additive identity) of X.
 	 * @return the zero element of X.

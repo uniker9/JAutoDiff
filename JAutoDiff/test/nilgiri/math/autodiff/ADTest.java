@@ -17,7 +17,7 @@ public class ADTest {
 		String func_str = i_f.toString();
 		double func_value = i_f.getValue().doubleValue();
 		
-		System.out.println(func_str +" = "+ func_value);
+		System.out.println(func_str +" = "+ func_value +" is expected as "+ i_expected);
 		Assert.assertEquals(func_str, i_expected, func_value);
 	}
 

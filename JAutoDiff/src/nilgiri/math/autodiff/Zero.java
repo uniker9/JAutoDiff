@@ -1,6 +1,6 @@
 package nilgiri.math.autodiff;
 
-import nilgiri.math.AbstractFieldFactory;
+import nilgiri.math.AbstractIdentityFactory;
 import nilgiri.math.Field;
 
 /** This class represents the zero element of X forms a field.
@@ -13,7 +13,7 @@ public class Zero<X extends Field<X>> extends Constant<X> {
 	/** Constructs an object whose value is zero.
 	 * @param i_factory
 	 */
-	public Zero(AbstractFieldFactory<X> i_factory) {
+	public Zero(AbstractIdentityFactory<X> i_factory) {
 		super(i_factory.zero(), i_factory);
 	}
 

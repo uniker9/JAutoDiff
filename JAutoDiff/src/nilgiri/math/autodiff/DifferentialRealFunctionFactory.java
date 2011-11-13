@@ -1,21 +1,21 @@
 package nilgiri.math.autodiff;
 
-import nilgiri.math.AbstractFieldFactory;
+import nilgiri.math.AbstractIdentityFactory;
 import nilgiri.math.AbstractRealFunctionFactory;
 
 import nilgiri.math.RealNumber;
 
 public class DifferentialRealFunctionFactory<X extends RealNumber<X>> implements 
-	AbstractFieldFactory<DifferentialFunction<X>> {
+	AbstractIdentityFactory<DifferentialFunction<X>> {
 	
-	protected AbstractFieldFactory<X> m_RNFactory;
+	protected AbstractIdentityFactory<X> m_RNFactory;
 	protected AbstractRealFunctionFactory<X> m_RFFactory;	
 
 	/**
 	 * @param i_RNFactory
 	 * @param i_RFFactory
 	 */
-	public DifferentialRealFunctionFactory(AbstractFieldFactory<X> i_RNFactory,
+	public DifferentialRealFunctionFactory(AbstractIdentityFactory<X> i_RNFactory,
 			AbstractRealFunctionFactory<X> i_RFFactory) {
 		if (i_RNFactory != null && i_RFFactory != null) {
 			m_RNFactory = i_RNFactory;

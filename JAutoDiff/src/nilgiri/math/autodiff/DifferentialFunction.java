@@ -12,7 +12,7 @@ import nilgiri.math.Field;
  * @param <X> A set forms a field.
  */
 public abstract class DifferentialFunction<X extends Field<X>> implements
-		Field<DifferentialFunction<X>>, Differential<Variable<X>, DifferentialFunction<X>> {
+		Field<DifferentialFunction<X>>, Differential<X, DifferentialFunction<X>> {
 
 	protected DifferentialFunction() {
 	}

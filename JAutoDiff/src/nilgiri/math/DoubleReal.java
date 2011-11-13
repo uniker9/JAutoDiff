@@ -1,6 +1,8 @@
 package nilgiri.math;
 
-public class DoubleReal implements RealNumber<DoubleReal> {
+import com.sun.org.apache.bcel.internal.generic.NEW;
+
+public class DoubleReal implements RealNumber<DoubleReal>, Cloneable {
 	//immutable
 	
 	private double m_x;
@@ -11,14 +13,6 @@ public class DoubleReal implements RealNumber<DoubleReal> {
 
 	public DoubleReal(double i_v) {
 		m_x = i_v;
-	}
-
-	public DoubleReal(DoubleReal i_rd) {
-		this(i_rd.m_x);
-	}
-
-	public void assign(DoubleReal i_rd) {
-		m_x = i_rd.m_x;
 	}
 
 	public double doubleValue() {
@@ -33,7 +27,7 @@ public class DoubleReal implements RealNumber<DoubleReal> {
 		return String.valueOf(m_x);
 	}
 
-	public DoubleReal clone() {
+	public Object clone() {
 		return new DoubleReal(m_x);
 	}
 

@@ -1,6 +1,6 @@
 package nilgiri.math.autodiff;
 
-import nilgiri.math.AbstractFieldFactory;
+import nilgiri.math.AbstractIdentityFactory;
 import nilgiri.math.Field;
 
 /** Variables in X forms a field.
@@ -11,12 +11,12 @@ import nilgiri.math.Field;
 public class Variable<X extends Field<X>> extends DifferentialFunction<X> {
 
 	private X m_x;
-	private AbstractFieldFactory<X> m_factory;
+	private AbstractIdentityFactory<X> m_factory;
 	private String m_name;
 
 
 	protected Variable(String i_name, X i_v,
-			AbstractFieldFactory<X> i_factory) {
+			AbstractIdentityFactory<X> i_factory) {
 		setName(i_name);
 		if (i_v != null && i_factory != null) {
 			m_x = i_v;
@@ -26,7 +26,7 @@ public class Variable<X extends Field<X>> extends DifferentialFunction<X> {
 		}
 	}
 
-	protected AbstractFieldFactory<X> factory() {
+	protected AbstractIdentityFactory<X> factory() {
 		return m_factory;
 	}
 
@@ -76,5 +76,8 @@ public class Variable<X extends Field<X>> extends DifferentialFunction<X> {
 		return getName();
 	}
 
-
+	public DifferentialFunction<X> div(DifferentialFunction<X> i_v) {
+		return (i_v == this) ? new One<X>(m_factory) : super.mul(i_v.inverse());
+	}
+	
 }

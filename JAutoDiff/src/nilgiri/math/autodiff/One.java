@@ -1,6 +1,6 @@
 package nilgiri.math.autodiff;
 
-import nilgiri.math.AbstractFieldFactory;
+import nilgiri.math.AbstractIdentityFactory;
 
 import nilgiri.math.Field;
 
@@ -14,7 +14,7 @@ public class One<X extends Field<X>> extends Constant<X> {
 	/** Constructs an object whose value is one.
 	 * @param i_factory
 	 */
-	public One(AbstractFieldFactory<X> i_factory) {
+	public One(AbstractIdentityFactory<X> i_factory) {
 		super(i_factory.one(), i_factory);
 	}
 

@@ -4,7 +4,7 @@ package nilgiri.math;
  * @author uniker9
  *
  */
-public class DoubleRealFactory implements AbstractFieldFactory<DoubleReal> {
+public class DoubleRealFactory implements AbstractIdentityFactory<DoubleReal> {
 
 	private static final DoubleRealFactory m_INSTANCE = new DoubleRealFactory();
 

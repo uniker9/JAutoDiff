@@ -11,6 +11,6 @@ import nilgiri.math.Field;
  * @param <X> A set forms a field.
  */
 public interface DifferentialVectorFunction<X extends Field<X>> extends
-		CommutativeGroup<DifferentialVectorFunction<X>>, Differential<Variable<X>, DifferentialVectorFunction<X>> {
+		CommutativeGroup<DifferentialVectorFunction<X>>, Differential<X, DifferentialVectorFunction<X>> {
 	
 }
