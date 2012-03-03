@@ -28,25 +28,28 @@ public class Zero<X extends Field<X>> extends Constant<X> {
 	}
 	
 	@Override
-	public DifferentialFunction<X> mul(DifferentialFunction<X> i_v) {
+	//public DifferentialFunction<X> mul(DifferentialFunction<X> i_v) {
+	public Zero<X> mul(DifferentialFunction<X> i_v) {
 		return this;
 	}
 	
 	@Override
-	protected DifferentialFunction<X> muled(DifferentialFunction<X> i_v) {
+	//protected DifferentialFunction<X> muled(DifferentialFunction<X> i_v) {
+	protected Zero<X> muled(DifferentialFunction<X> i_v) {
 		return this;
 	}
 
 	@Override
-	public DifferentialFunction<X> inverse() {
-	//public Constant<X> inverse() {
+	//public DifferentialFunction<X> inverse() {
+	public Constant<X> inverse() {
 		//TODO
 		return null;
 	}
 
 	@Override
-	public DifferentialFunction<X> negate() {
+	//public DifferentialFunction<X> negate() {
 	//public Constant<X> negate() {
+	public Zero<X> negate() {
 		return this;
 	}
 

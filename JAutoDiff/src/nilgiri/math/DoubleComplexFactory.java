@@ -4,8 +4,7 @@ package nilgiri.math;
  * @author uniker9
  *
  */
-public class DoubleComplexFactory implements
-		AbstractIdentityFactory<DoubleComplex> {
+public class DoubleComplexFactory implements AbstractIdentityFactory<DoubleComplex> {
 
 	private static final DoubleComplexFactory m_INSTANCE = new DoubleComplexFactory();
 

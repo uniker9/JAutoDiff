@@ -9,9 +9,9 @@ public class DoubleRealInterval implements RealNumber<DoubleRealInterval>, Clone
 	private RealInterval m_x; 
 	
 
-	public DoubleRealInterval() {
-		m_x = new RealInterval();
-	}
+	//public DoubleRealInterval() {
+	//	m_x = new RealInterval();
+	//}
 	public DoubleRealInterval(double i_v) {
 		m_x = new RealInterval(i_v);
 	}
@@ -22,6 +22,27 @@ public class DoubleRealInterval implements RealNumber<DoubleRealInterval>, Clone
 	public RealInterval viewInternal() {
 		return m_x;
 	}
+	public double lo(){
+		return m_x.lo();
+	}
+	public double hi(){
+		return m_x.hi();
+	}
+	public double center(){
+		return 0.5*(m_x.hi() + m_x.lo());
+	}
+	public double doubleValue(){
+		return center();
+	}
+	
+	public double width(){
+		return (m_x.hi() - m_x.lo());
+	}
+	
+	public boolean contains(double i_p){
+		return !(i_p < lo() || i_p > hi());
+	}
+
 
 	protected DoubleRealInterval(RealInterval i_v){
 		m_x = i_v;

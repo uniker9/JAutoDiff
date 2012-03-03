@@ -4,7 +4,7 @@ package nilgiri.math;
  * @author uniker9
  *
  */
-public class DoubleRealFactory implements AbstractIdentityFactory<DoubleReal> {
+public class DoubleRealFactory implements AbstractRealNumberFactory<DoubleReal> {
 
 	private static final DoubleRealFactory m_INSTANCE = new DoubleRealFactory();
 
@@ -22,7 +22,7 @@ public class DoubleRealFactory implements AbstractIdentityFactory<DoubleReal> {
 	 * @param i_v
 	 * @return DoubleReal(i_v)
 	 */
-	public DoubleReal create(double i_v) {
+	public DoubleReal val(double i_v) {
 		return new DoubleReal(i_v);
 	}
 
@@ -37,5 +37,37 @@ public class DoubleRealFactory implements AbstractIdentityFactory<DoubleReal> {
 		return m_UNIT;
 	}
 
+
+	public DoubleReal cos(DoubleReal i_x) {
+		return new DoubleReal(Math.cos(i_x.doubleValue()));
+	}
+
+	public DoubleReal sin(DoubleReal i_x) {
+		return new DoubleReal(Math.sin(i_x.doubleValue()));
+	}
+
+	public DoubleReal tan(DoubleReal i_x) {
+		return new DoubleReal(Math.tan(i_x.doubleValue()));
+	}
+
+	public DoubleReal exp(DoubleReal i_x) {
+		return new DoubleReal(Math.exp(i_x.doubleValue()));
+	}
+
+	public DoubleReal log(DoubleReal i_x) {
+		return new DoubleReal(Math.log(i_x.doubleValue()));
+	}
+
+	public DoubleReal pow(DoubleReal i_x, DoubleReal i_y) {
+		return new DoubleReal(Math.pow(i_x.doubleValue(), i_y.doubleValue()));
+	}
+	
+	public DoubleReal sqrt(DoubleReal i_x) {
+		return new DoubleReal(Math.sqrt(i_x.doubleValue()));
+	}
+	
+	public DoubleReal square(DoubleReal i_x) {
+		return new DoubleReal(i_x.doubleValue() * i_x.doubleValue());
+	}
 	
 }

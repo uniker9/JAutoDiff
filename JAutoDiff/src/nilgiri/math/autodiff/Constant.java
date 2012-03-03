@@ -60,13 +60,13 @@ public class Constant<X extends Field<X>> extends DifferentialFunction<X> {
 		return i_v.isConstant() ? new Constant<X>(i_v.getValue().mul(this.m_x), m_factory) : super.muled(i_v);
 	} 
 
-	public DifferentialFunction<X> inverse() {
-	//public Constant<X> inverse() {
+	//public DifferentialFunction<X> inverse() {
+	public Constant<X> inverse() {
 		return new Constant<X>(m_x.inverse(), m_factory);
 	}
 
-	public DifferentialFunction<X> negate() {
-	//public Constant<X> negate() {
+	//public DifferentialFunction<X> negate() {
+	public Constant<X> negate() {
 		return new Constant<X>(m_x.negate(), m_factory);
 	}
 

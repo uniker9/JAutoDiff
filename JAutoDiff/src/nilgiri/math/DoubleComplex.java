@@ -97,8 +97,9 @@ public class DoubleComplex implements ComplexNumber<DoubleReal, DoubleComplex>, 
 	}
 
 	public DoubleComplex pow(int i_n) {
-		// TODO Auto-generated method stub
-		return null;
+		double abs = this.absolute_square();
+		return new DoubleComplex(abs*Math.cos(((double)i_n)*Math.acos(m_re/abs)), 
+				abs*Math.sin(((double)i_n)*Math.asin(m_im/abs)));
 	}
 
 	public DoubleComplex mul(long i_n) {

@@ -5,8 +5,17 @@ package nilgiri.math;
  *
  * @param <X> Real numbers.
  */
-public interface AbstractRealFunctionFactory<X extends RealNumber<X>> {
+public interface AbstractRealNumberFactory<X extends RealNumber<X>> extends AbstractIdentityFactory<X>{
 
+	
+	
+	/** Returns an object of DoubleReal whose value is i_v.  
+	 * @param i_v
+	 * @return X whose value is i_v
+	 */
+	public X val(double i_v);
+
+	
 	/** Returns an object of X whose value is cos(i_x). 
 	 * @param i_x
 	 * @return cos(i_x)
@@ -43,5 +52,18 @@ public interface AbstractRealFunctionFactory<X extends RealNumber<X>> {
 	 * @return i_x ^ i_y
 	 */
 	X pow(X i_x, X i_y);
+
+
+	/** Returns an object of X whose value is sqrt(i_x)
+	 * @param i_x
+	 * @return sqrt(i_x)
+	 */
+	X sqrt(X i_x);
+	
+	/** Returns an object of X whose value is i_x * i_x
+	 * @param i_x
+	 * @return i_x * i_x
+	 */
+	X square(X i_x);
 
 }
