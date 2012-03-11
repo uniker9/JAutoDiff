@@ -26,9 +26,12 @@ public class StringDrawer implements Drawer {
 	
 	public void draw() {
 		m_applet.pushMatrix();
-		m_applet.fill(m_color.getRGB());
+		
+		//m_applet.scale(m_size/m_applet.viewConfig().getScale());
 		m_applet.scale(m_size);
-		m_applet.text(m_str, m_x, m_y);
+		m_applet.translate(m_x, m_y);
+		m_applet.fill(m_color.getRGB());
+		m_applet.text(m_str, 0, 0);
 		m_applet.popMatrix();
 		
 	}

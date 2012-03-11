@@ -16,8 +16,9 @@ public class AnalyticalMover<R extends RealNumber<R>> extends AbstractMover<R>{
 	public AnalyticalMover(
 			Variable<R> i_t,
 			DifferentialFunction<R> i_radius,
-			DifferentialVectorFunction<R> i_pos){
-		super(i_t);
+			DifferentialVectorFunction<R> i_pos){//,
+			//MoverDrawer<R> i_drawer){
+		super(i_t);//, i_drawer);
 		m_radius = i_radius;
 		m_position = i_pos;
 		m_velocity = m_position.diff(m_t);

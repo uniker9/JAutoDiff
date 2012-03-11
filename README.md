@@ -11,9 +11,7 @@ This library provides a framework to compute derivatives of functions
 on arbitrary types of [field](http://en.wikipedia.org/wiki/Field_\(mathematics\)) 
 using [generics](http://en.wikipedia.org/wiki/Generics_in_Java).
 
-*NEWS[2012/03/03] : Adapters for [ia_math](http://interval.sourceforge.net/interval/java/ia_math/README.html), 
-  one of the implementations of [interval arithmetic](http://en.wikipedia.org/wiki/Interval_arithmetic), 
-  and a demonstration program are released.*
+
 
 # Sample : ADTest.java
 

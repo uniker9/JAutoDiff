@@ -17,10 +17,10 @@ public abstract class AbstractViewerPApplet extends PApplet{
 	public void keyPressed(){
 		switch(keyCode){
 		case KeyEvent.VK_T:
-			m_mgmode = new MouseGestureTranslationMode(this, m_vc);
+			setMouseGestureMode(new MouseGestureTranslationMode(this, m_vc));
 			break;
 		case KeyEvent.VK_Z:
-			m_mgmode = new  MouseGestureScaleMode(this, m_vc);
+			setMouseGestureMode(new  MouseGestureScaleMode(this, m_vc));
 			break;
 		default:
 			break;
@@ -30,10 +30,15 @@ public abstract class AbstractViewerPApplet extends PApplet{
 	public ViewConfig2D viewConfig(){
 		return m_vc;
 	}
-	
+
 	public MouseGestureMode getMouseGestureMode(){
 		return m_mgmode;
 	}
+	
+	protected void setMouseGestureMode(MouseGestureMode i_mgmode){
+		m_mgmode = i_mgmode;
+	}
+	
 	public void mouseDragged(){
 		m_mgmode.mouseDragged();
 		Color bgcolor = this.getBackground(); 

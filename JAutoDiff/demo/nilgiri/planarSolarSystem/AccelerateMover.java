@@ -17,9 +17,9 @@ public class AccelerateMover<R extends RealNumber<R>> extends AbstractMover<R>{
 			DifferentialFunction<R> i_radius,
 			VariableVector<R> i_position,
 			VariableVector<R> i_velocity,
-			DifferentialVectorFunction<R> i_accel
-			){
-		super(i_t);
+			DifferentialVectorFunction<R> i_accel){//,
+			//MoverDrawer<R> i_drawer){
+		super(i_t);//, i_drawer);
 		m_radius = i_radius;
 		m_position = i_position;
 		m_velocity = i_velocity;

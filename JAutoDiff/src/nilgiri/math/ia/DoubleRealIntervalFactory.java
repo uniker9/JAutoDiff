@@ -23,12 +23,6 @@ public class DoubleRealIntervalFactory implements AbstractRealNumberFactory<Doub
 		return m_INSTANCE;
 	}
 
-	/** Returns an object of DoubleRealInterval whose value is i_v.  
-	 * @return DoubleRealInterval()
-	 */
-//	public DoubleRealInterval create() {
-//		return new DoubleRealInterval();
-//	}
 	
 	/** Returns an object of DoubleRealInterval whose value is i_v.  
 	 * @param i_v

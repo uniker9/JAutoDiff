@@ -12,10 +12,11 @@ abstract public class AbstractMover<R extends RealNumber<R> >{
 
 	protected Variable<R> m_t;
 	protected ArrayList<Drawer> m_drawerList;
-				
+//	protected MoverDrawer<R> m_drawer; 
 	
-	AbstractMover(Variable<R> i_t){
+	AbstractMover(Variable<R> i_t){//, MoverDrawer<R> i_drawer){
 		m_t = i_t;
+//		m_drawer = i_drawer;
 		m_drawerList = new ArrayList<Drawer>();
 	}
 
@@ -29,7 +30,7 @@ abstract public class AbstractMover<R extends RealNumber<R> >{
 	abstract DifferentialVectorFunction<R> accel();
 	
 
-	
+//	/*
 	public void addDrawer(Drawer i_drawer){
 		m_drawerList.add(i_drawer);
 	}
@@ -39,11 +40,15 @@ abstract public class AbstractMover<R extends RealNumber<R> >{
 	public void delDrawer(Drawer i_drawer){
 		m_drawerList.remove(i_drawer);
 	}
+//	*/
 	public void draw(){
+//		m_drawer.draw(this);
+//		/*
 		Iterator<Drawer> itr = m_drawerList.iterator();
 		while(itr.hasNext()){
 			Drawer drawer = itr.next();
 			drawer.draw();
 		}
+//		*/
 	}
 }
