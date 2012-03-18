@@ -8,6 +8,8 @@ import nilgiri.math.RealNumber;
 import nilgiri.math.autodiff.Constant;
 import nilgiri.math.autodiff.DifferentialRealFunctionFactory;
 import nilgiri.math.autodiff.Variable;
+import nilgiri.physics.AbstractMover;
+import nilgiri.physics.AnalyticalMover;
 
 public class MoverSimulator<X extends RealNumber<X>> {
 	
@@ -20,8 +22,6 @@ public class MoverSimulator<X extends RealNumber<X>> {
 	private Constant<X> m_dt;
 	
 	private ArrayList<AnalyticalMover<X>> m_analiticalMoverList;
-//	private ArrayList<AccelerateMover<X>> m_accelerateMoverList;
-
 	private HashMap<AbstractMover<X>, String> m_moverNameMap; 
 	
 	public MoverSimulator(

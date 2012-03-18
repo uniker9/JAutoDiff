@@ -8,7 +8,7 @@ public class MouseGestureTranslationMode extends MouseGestureMode{
 	private ViewConfig2D m_vc; 
 		
 	public MouseGestureTranslationMode(PApplet i_applet, ViewConfig2D i_vc){
-		super("MODE [Translation]");
+		super();
 		m_applet = i_applet;
 		m_vc = i_vc;
 	}
@@ -22,4 +22,7 @@ public class MouseGestureTranslationMode extends MouseGestureMode{
 		m_vc.setTranslation(translation);
 	}
 
+	public String toString(){
+		return "Mode [Translation]";
+	}
 }

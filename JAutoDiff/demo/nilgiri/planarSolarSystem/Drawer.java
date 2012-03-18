@@ -1,7 +1,7 @@
 package nilgiri.planarSolarSystem;
 
 
-public interface Drawer {
+public interface Drawer<T> {
 
-	public void draw();
+	public void draw(T i_obj);
 }

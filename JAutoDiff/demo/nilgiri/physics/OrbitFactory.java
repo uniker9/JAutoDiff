@@ -1,4 +1,4 @@
-package nilgiri.planarSolarSystem;
+package nilgiri.physics;
 
 import nilgiri.math.AbstractRealNumberFactory;
 import nilgiri.math.RealNumber;

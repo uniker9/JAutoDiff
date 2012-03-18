@@ -1,4 +1,4 @@
-package nilgiri.planarSolarSystem;
+package nilgiri.physics;
 
 import nilgiri.math.RealNumber;
 import nilgiri.math.autodiff.DifferentialFunction;

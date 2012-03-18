@@ -1,4 +1,4 @@
-package nilgiri.planarSolarSystem;
+package nilgiri.physics;
 
 import nilgiri.math.RealNumber;
 import nilgiri.math.autodiff.DifferentialFunction;
@@ -16,9 +16,8 @@ public class AnalyticalMover<R extends RealNumber<R>> extends AbstractMover<R>{
 	public AnalyticalMover(
 			Variable<R> i_t,
 			DifferentialFunction<R> i_radius,
-			DifferentialVectorFunction<R> i_pos){//,
-			//MoverDrawer<R> i_drawer){
-		super(i_t);//, i_drawer);
+			DifferentialVectorFunction<R> i_pos){
+		super(i_t);
 		m_radius = i_radius;
 		m_position = i_pos;
 		m_velocity = m_position.diff(m_t);
@@ -26,22 +25,22 @@ public class AnalyticalMover<R extends RealNumber<R>> extends AbstractMover<R>{
 	}
 
 	@Override
-	DifferentialFunction<R> radius() {
+	public DifferentialFunction<R> radius() {
 		return m_radius;
 	}
 
 	@Override
-	DifferentialVectorFunction<R> position() {
+	public DifferentialVectorFunction<R> position() {
 		return m_position;
 	}
 
 	@Override
-	DifferentialVectorFunction<R> velocity() {
+	public DifferentialVectorFunction<R> velocity() {
 		return m_velocity;
 	}
 
 	@Override
-	DifferentialVectorFunction<R> accel() {
+	public DifferentialVectorFunction<R> acceleration() {
 		return m_accel;
 	}
 	

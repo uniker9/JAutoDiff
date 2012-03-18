@@ -8,7 +8,7 @@ public class MouseGestureScaleMode extends MouseGestureMode{
 	private ViewConfig2D m_vc; 
 		
 	public MouseGestureScaleMode(PApplet i_applet, ViewConfig2D i_vc){
-		super("MODE [Zoom]");
+		super();
 		m_applet = i_applet;
 		m_vc = i_vc;
 	}
@@ -18,4 +18,7 @@ public class MouseGestureScaleMode extends MouseGestureMode{
 		m_vc.setScale(m_vc.getScale()*(1.0f + dscale));
 	}
 
+	public String toString(){
+		return "Mode [Zoom]";
+	}
 }

@@ -4,18 +4,18 @@ package nilgiri.planarSolarSystem;
 
 import java.awt.Color;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 import java.util.Iterator;
 import javax.swing.JFrame;
 
-import net.sourceforge.interval.ia_math.RealInterval;
 import nilgiri.math.autodiff.DifferentialRealFunctionFactory;
 import nilgiri.math.autodiff.DifferentialVectorFunction;
 import nilgiri.math.autodiff.Variable;
 import nilgiri.math.ia.DoubleRealInterval;
 import nilgiri.math.ia.DoubleRealIntervalFactory;
+import nilgiri.physics.AnalyticalMover;
+import nilgiri.physics.OrbitFactory;
 import nilgiri.processing.AbstractViewerPApplet;
-import nilgiri.processing.MouseGestureScaleMode;
-import nilgiri.processing.MouseGestureTranslationMode;
 import nilgiri.processing.PAppletFrame;
 import nilgiri.processing.ViewConfig2D;
 
@@ -31,81 +31,59 @@ public class PlanarSolarSystemApplet extends AbstractViewerPApplet{
 	private MoverSimulator<DoubleRealInterval> m_simulator; // must be initialized in setup()
 	private int m_steps = 0;
 	
-	private enum StateSpaceType{POSITION, VELOCITY, ACCEL, NONE};	
-	private StateSpaceType m_sstype = StateSpaceType.NONE;
-	private String m_sstypeName = "";
 
-	private boolean m_drawWithBounds = false; 
+	private StateType m_sstype = StateType.NONE;
+	private String m_sstypeName = "";
+	
+
+	
+	private StateGetter<DoubleRealInterval> m_stateGetter;
+	protected ArrayList<Drawer<PSSMover<DoubleRealInterval>>> m_drawerList = new ArrayList<Drawer<PSSMover<DoubleRealInterval>>>() ;
+	protected ArrayList<PSSMover<DoubleRealInterval>> m_moverList = new ArrayList<PSSMover<DoubleRealInterval>>();
 	
 	
 	private static final double AU = 149597870000.0; // Astronomical Unit : the mean Earth-Sun distance.
 
 	
-	private LocalCanvasOriginTranslater m_LCOTranslater = new LocalCanvasOriginTranslater();
-	private class LocalCanvasOriginTranslater{
-		public void translate(AbstractMover<DoubleRealInterval> i_mover){
-		}
-	}
-	private BoundsDrawer m_boundsDrawer = new BoundsDrawer();
-	private class BoundsDrawer{
-		public void draw(AbstractMover<DoubleRealInterval> i_mover){
-		}
-	}
-
-	public StateSpaceType getStateSpaceType(){
+	
+	public StateType getStateSpaceType(){
 		return m_sstype;
 	}
-	public void setStateSpaceType(StateSpaceType i_s){
-		m_sstype = i_s;
- 		setDrawWithBounds(false);
+	public void setStateSpaceType(StateType i_s){
 		ViewConfig2D vc = viewConfig();
 		switch(i_s){
 		case POSITION:
-			m_sstypeName = "STATE [POSIITON]";
-			m_LCOTranslater = new LocalCanvasOriginTranslater(){
-				public void translate(AbstractMover<DoubleRealInterval> i_mover){
-					PlanarSolarSystemApplet.this.translateLCO(i_mover.position());
-				}
-			};
+			m_sstype = StateType.POSITION;
+			m_stateGetter.setStateType(StateType.POSITION);
+			m_sstypeName = "State [Position]";
 			vc.setScale((float)(0.3f*this.getWidth()/AU));
 			vc.setTranslation(0.0f, 0.0f);
 			break;
 		case VELOCITY:
-			m_sstypeName = "STATE [VELOCITY]"; 
-			m_LCOTranslater = new LocalCanvasOriginTranslater(){
-				public void translate(AbstractMover<DoubleRealInterval> i_mover){
-					PlanarSolarSystemApplet.this.translateLCO(i_mover.velocity());
-				}
-			};
+			m_sstype = StateType.VELOCITY;
+			m_stateGetter.setStateType(StateType.VELOCITY);
+			m_sstypeName = "State [Velocity]";
 			vc.setScale(1e-3f);
 			vc.setTranslation(0.0f, 0.0f);
 			break;
-		case ACCEL:
-			m_sstypeName = "STATE [ACCEL]"; 
-			m_LCOTranslater = new LocalCanvasOriginTranslater(){
-				public void translate(AbstractMover<DoubleRealInterval> i_mover){
-					PlanarSolarSystemApplet.this.translateLCO(i_mover.accel());
-				}
-			};
+		case ACCELERATION:
+			m_sstype = StateType.ACCELERATION;
+			m_stateGetter.setStateType(StateType.ACCELERATION);
+			m_sstypeName = "State [Acceleration]";
 			vc.setScale(1e+3f);
 			vc.setTranslation(0.0f, 0.0f);
 			break;
 		default:
-			m_LCOTranslater = new LocalCanvasOriginTranslater();
 			break;
 		}
 	}
-	private void translateLCO(DifferentialVectorFunction<DoubleRealInterval> i_pos){ //LocalCanvasOrigin
-		DoubleRealInterval x = i_pos.get(0).getValue();
-		DoubleRealInterval y = i_pos.get(1).getValue();
-		translate((float)x.center(), (float)-y.center());
-	}
+
 	
 	
 	public void setup(){
 		
-		int windowWidth = 800;
-		int windowHeight = 800;
+		int windowWidth = 600;
+		int windowHeight = 600;
 
 		size(windowWidth, windowHeight);
 		textFont(createFont("Lucida Console", 12));
@@ -123,15 +101,19 @@ public class PlanarSolarSystemApplet extends AbstractViewerPApplet{
 		DoubleRealIntervalFactory VF = DoubleRealIntervalFactory.instance();
 		DifferentialRealFunctionFactory<DoubleRealInterval> FF = new DifferentialRealFunctionFactory<DoubleRealInterval>(VF);
 		m_simulator = new MoverSimulator<DoubleRealInterval>(VF, FF);
-		m_simulator.setT(VF.val(0.0, 100000.0));
-		m_simulator.setDT(VF.val(1000.0));
+		m_simulator.setT(VF.valWithTolerance(0.0, 50000.0));
+		m_simulator.setDT(VF.val(10000.0));
+		
 		
 		Variable<DoubleRealInterval> t = m_simulator.getT();
 		
 		OrbitFactory<DoubleRealInterval> MF = new OrbitFactory<DoubleRealInterval>(VF, FF);
 		
 		final int DIM = 2;
-
+		
+		m_stateGetter = new StateGetter<DoubleRealInterval>(StateType.POSITION);
+		setStateSpaceType(StateType.POSITION);
+		m_drawerList.add(new PSSMoverDrawer(this, m_stateGetter));
 		
 		//----------------------------------------
 		// Create Sun
@@ -146,8 +128,11 @@ public class PlanarSolarSystemApplet extends AbstractViewerPApplet{
 				);
 		AnalyticalMover<DoubleRealInterval> sun  = new AnalyticalMover<DoubleRealInterval>(
 				t, FF.val(VF.val(1392000000.0)), sun_orbit);
-		sun.addDrawer(new OvalDrawer(this, 20.0f, new Color(255,69, 0)));
-		sun.addDrawer(new StringDrawer(this, "Sun", 22, 0, 1.0f, Color.white));
+		PSSMover<DoubleRealInterval> pss_sun = new PSSMover<DoubleRealInterval>("Sun", sun, new Color(255, 69, 0), 20.0f);
+		//sun.addDrawer(new PSSMoverDrawer(this, 20.0f, new Color(255,69, 0)));
+//		sun.addDrawer(new StringDrawer(this, "Sun", 22, 0, 1.0f, Color.white));
+//		m_drawerList.addDrawer();
+		m_moverList.add(pss_sun);
 		m_simulator.addAnalyticalMover("Sun", sun);
 		
 		
@@ -165,8 +150,10 @@ public class PlanarSolarSystemApplet extends AbstractViewerPApplet{
 				);
 		AnalyticalMover<DoubleRealInterval> earth  = new AnalyticalMover<DoubleRealInterval>(
 				t, FF.val(VF.val(6356752.0)), earth_orbit);
-		earth.addDrawer(new OvalDrawer(this, 5.0f, new Color(0, 0, 205)));
-		earth.addDrawer(new StringDrawer(this, "Earth", 7, 0, 1.0f, Color.white));
+		PSSMover<DoubleRealInterval> pss_earth = new PSSMover<DoubleRealInterval>("Earth", earth, new Color(0, 0, 205), 5.0f);
+//		earth.addDrawer(new PSSMoverDrawer(this, 5.0f, new Color(0, 0, 205)));
+//		earth.addDrawer(new StringDrawer(this, "Earth", 7, 0, 1.0f, Color.white));
+		m_moverList.add(pss_earth);
 		m_simulator.addAnalyticalMover("Earth", earth);
 		
 		//----------------------------------------
@@ -183,12 +170,13 @@ public class PlanarSolarSystemApplet extends AbstractViewerPApplet{
 				);
 		AnalyticalMover<DoubleRealInterval> moon  = new AnalyticalMover<DoubleRealInterval>(
 				t, FF.val(VF.val(137150.0)), moon_orbit);
-		moon.addDrawer(new OvalDrawer(this, 3.0f, Color.YELLOW));//new Color(192, 192, 192)));
-		moon.addDrawer(new StringDrawer(this, "Moon", 5, 0, 1.0f, Color.white));
+		PSSMover<DoubleRealInterval> pss_moon = new PSSMover<DoubleRealInterval>("Moon", moon, Color.YELLOW, 3.0f);
+//		moon.addDrawer(new PSSMoverDrawer(this, 3.0f, Color.YELLOW));//new Color(192, 192, 192)));
+//		moon.addDrawer(new StringDrawer(this, "Moon", 5, 0, 1.0f, Color.white));
+		m_moverList.add(pss_moon);
 		m_simulator.addAnalyticalMover("Moon", moon);
 		
-		setStateSpaceType(StateSpaceType.POSITION);
-		setStepsPerFrame(10);
+		setStepsPerFrame(1);
 	}
 	
 	public void setStepsPerFrame(int i_steps){ //Steps Per Frame
@@ -208,103 +196,68 @@ public class PlanarSolarSystemApplet extends AbstractViewerPApplet{
 		scale(vc.getScale());				
 		vc.getTranslation(translation);
 		translate(translation[0], translation[1]);
+		scale(1.0f/viewConfig().getScale());		
 		
+	
 		
-		
-		Iterator<AbstractMover<DoubleRealInterval> > itr =  m_simulator.getMoverIterator();
-
+			
+		Iterator<PSSMover<DoubleRealInterval> > itr =  m_moverList.iterator();
 		while(itr.hasNext()){
-			AbstractMover<DoubleRealInterval> mover = itr.next();
-			pushMatrix();
-			m_LCOTranslater.translate(mover);
-			m_boundsDrawer.draw(mover);
-			scale(1.0f/viewConfig().getScale());
-			mover.draw();
-			popMatrix();
+			PSSMover<DoubleRealInterval> mover = itr.next();
+			Iterator<Drawer<PSSMover<DoubleRealInterval>>> drawer_itr =  m_drawerList.iterator();
+			while(drawer_itr.hasNext()){
+				Drawer<PSSMover<DoubleRealInterval>> drawer = drawer_itr.next();
+				drawer.draw(mover);
+			}
 		}
-		popMatrix();
 		
+		popMatrix();
 		popMatrix();
 		
 		// Draw Header Field
 		fill(getBackground().getRGB());
-		rect(0, 0, getWidth(), 30);
+		final int header_box_height = 30;
+		final int footer_box_height = 30;
+		rect(0, 0, getWidth(), header_box_height);
+		rect(0, getHeight()-footer_box_height, getWidth(), getHeight());
 		fill(255);
+
 		
-		int baseline = 20;
+		final int header_box_padding_left = 20;
+		final int header_box_padding_bottom = 10;
+		final int header_line = (header_box_height - header_box_padding_bottom);
+		text(m_sstypeName, header_box_padding_left, header_line);
+		text(this.getMouseGestureMode().toString(), getWidth()-150, header_line);
+
 		DoubleRealInterval t = m_simulator.getT().getValue();
-		double tcenter = t.center();
-		double trange = 0.5*t.width();
-		text(m_sstypeName +"    t : "+ String.format("%6.5f +- %6.5f", tcenter, trange), 50, baseline);
-		text(getMouseGestureMode().getName(), getWidth()-150, baseline);
-		
+		final double tcenter = t.center();
+		final double trange = 0.5*t.width();
+		final int footer_box_padding_left = 20;
+		final int footer_box_padding_bottom = 10;
+		final int footer_line = (getHeight() - footer_box_padding_bottom);
+		text("t : "+ String.format("%6.0f +- %6.5f", tcenter, trange), footer_box_padding_left, footer_line);
 		
 		
 		for(int i = 0; i < m_steps; i++){
 			m_simulator.nextStep();
+			//m_simulator.setT(VF.valWithTolerance(0.0, 50000.0));
+			//m_simulator.setDT(VF.val(20000.0));
 		}
 	}
-	public boolean getDrawWithBounds(){
-		return m_drawWithBounds;
-	}
-	public void setDrawWithBounds(boolean i_drawWithBounds){
-		m_drawWithBounds = i_drawWithBounds;
-		if(!m_drawWithBounds){
-			m_boundsDrawer = new BoundsDrawer();
-		}else{
-			switch(getStateSpaceType()){
-			case POSITION:
-				m_boundsDrawer = new BoundsDrawer(){
-					public void draw(AbstractMover<DoubleRealInterval> i_mover){
-						noFill();
-						drawRect(i_mover.position());
-					}
-				};
-				break;
-			case VELOCITY:
-				m_boundsDrawer = new BoundsDrawer(){
-					public void draw(AbstractMover<DoubleRealInterval> i_mover){
-						noFill();
-						drawRect(i_mover.velocity());
-					}
-				};
-				break;
-			case ACCEL:
-				m_boundsDrawer = new BoundsDrawer(){
-					public void draw(AbstractMover<DoubleRealInterval> i_mover){
-						noFill();
-						drawRect(i_mover.accel());
-					}
-				};
-				break;
-			default:
-				m_boundsDrawer = new BoundsDrawer();
-				break;
-			}
-		}
-	}
-	private void drawRect(DifferentialVectorFunction<DoubleRealInterval> i_pos){
-		DoubleRealInterval x = i_pos.get(0).getValue();
-		DoubleRealInterval y = i_pos.get(1).getValue();
-		float w = (float)(x.width());
-		float h = (float)(y.width());
-		rect(-0.5f*w, -0.5f*h, w, h);
-	}
+	
+	
 	
 	
 	public void keyPressed(){
 		switch(keyCode){
 		case KeyEvent.VK_P:
-			setStateSpaceType(StateSpaceType.POSITION);
+			setStateSpaceType(StateType.POSITION);
 			break;
 		case KeyEvent.VK_V:
-			setStateSpaceType(StateSpaceType.VELOCITY);
+			setStateSpaceType(StateType.VELOCITY);
 			break;
 		case KeyEvent.VK_A:
-			setStateSpaceType(StateSpaceType.ACCEL);
-			break;
-		case KeyEvent.VK_B:
-			setDrawWithBounds(!getDrawWithBounds());
+			setStateSpaceType(StateType.ACCELERATION);
 			break;
 		default:
 			super.keyPressed();
