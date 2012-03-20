@@ -114,6 +114,7 @@ public class PlanarSolarSystemApplet extends AbstractViewerPApplet{
 		m_stateGetter = new StateGetter<DoubleRealInterval>(StateType.POSITION);
 		setStateSpaceType(StateType.POSITION);
 		m_drawerList.add(new PSSMoverDrawer(this, m_stateGetter));
+		m_drawerList.add(new PSSMoverPropertyDrawer(this, m_stateGetter));
 		
 		//----------------------------------------
 		// Create Sun
@@ -129,9 +130,6 @@ public class PlanarSolarSystemApplet extends AbstractViewerPApplet{
 		AnalyticalMover<DoubleRealInterval> sun  = new AnalyticalMover<DoubleRealInterval>(
 				t, FF.val(VF.val(1392000000.0)), sun_orbit);
 		PSSMover<DoubleRealInterval> pss_sun = new PSSMover<DoubleRealInterval>("Sun", sun, new Color(255, 69, 0), 20.0f);
-		//sun.addDrawer(new PSSMoverDrawer(this, 20.0f, new Color(255,69, 0)));
-//		sun.addDrawer(new StringDrawer(this, "Sun", 22, 0, 1.0f, Color.white));
-//		m_drawerList.addDrawer();
 		m_moverList.add(pss_sun);
 		m_simulator.addAnalyticalMover("Sun", sun);
 		
@@ -151,8 +149,6 @@ public class PlanarSolarSystemApplet extends AbstractViewerPApplet{
 		AnalyticalMover<DoubleRealInterval> earth  = new AnalyticalMover<DoubleRealInterval>(
 				t, FF.val(VF.val(6356752.0)), earth_orbit);
 		PSSMover<DoubleRealInterval> pss_earth = new PSSMover<DoubleRealInterval>("Earth", earth, new Color(0, 0, 205), 5.0f);
-//		earth.addDrawer(new PSSMoverDrawer(this, 5.0f, new Color(0, 0, 205)));
-//		earth.addDrawer(new StringDrawer(this, "Earth", 7, 0, 1.0f, Color.white));
 		m_moverList.add(pss_earth);
 		m_simulator.addAnalyticalMover("Earth", earth);
 		
@@ -171,8 +167,6 @@ public class PlanarSolarSystemApplet extends AbstractViewerPApplet{
 		AnalyticalMover<DoubleRealInterval> moon  = new AnalyticalMover<DoubleRealInterval>(
 				t, FF.val(VF.val(137150.0)), moon_orbit);
 		PSSMover<DoubleRealInterval> pss_moon = new PSSMover<DoubleRealInterval>("Moon", moon, Color.YELLOW, 3.0f);
-//		moon.addDrawer(new PSSMoverDrawer(this, 3.0f, Color.YELLOW));//new Color(192, 192, 192)));
-//		moon.addDrawer(new StringDrawer(this, "Moon", 5, 0, 1.0f, Color.white));
 		m_moverList.add(pss_moon);
 		m_simulator.addAnalyticalMover("Moon", moon);
 		
