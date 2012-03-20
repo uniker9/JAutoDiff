@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset='utf-8'>
+
+  <title>uniker9/JAutoDiff @ GitHub</title>
+
+  <style type="text/css">
+    body {
+      margin-top: 1.0em;
+      background-color: #ffffff;
+      font-family: Helvetica, Arial, FreeSans, san-serif;
+      color: #000000;
+    }
+    #container {
+      margin: 0 auto;
+      width: 700px;
+    }
+    h1 { font-size: 3.8em; color: #334418; margin-bottom: 3px; }
+    h1 .small { font-size: 0.4em; }
+    h1 a { text-decoration: none }
+    h2 { font-size: 1.5em; color: #334418; }
+    h3 { text-align: center; color: #334418; }
+    a { color: #334418; }
+    .description { font-size: 1.2em; margin-bottom: 30px; margin-top: 30px; font-style: italic;}
+    .download { float: right; }
+    pre { background: #000; color: #fff; padding: 15px;}
+    hr { border: 0; width: 80%; border-bottom: 1px solid #aaa}
+    .footer { text-align:center; padding-top:30px; font-style: italic; }
+  </style>
+</head>
+<body>
+
+<div>
+<h2> PlanarSolarSystemApplet </h2>
+
+<p>
+A demonstration of JAutoDiff (A pure Java automatic differentiation library). <br>
+This applet program shows a dynamics of Sun-Earth-Moon system defined as<br>
+<dl>
+<dt>(Eq. 1)</dt>
+<dd><b><i>x</i></b><sub>sun</sub> = <b>0</b></dd>
+<dd><b><i>x</i></b><sub>earth</sub> = <b><i>x</i></b><sub>sun</sub> + <i>a</i><sub>earth</sub> (cos(<i>&theta;<sub></sub></i><sub>0 earth</sub> + <i>w</i><sub>earth</sub>(<i>t</i> - <i>t</i><sub>0</sub>)), sin(<i>&theta;<sub></sub></i><sub>0 earth</sub> + <i>w</i><sub>earth</sub>(<i>t</i> - <i>t</i><sub>0</sub>)))<sup>T</sup></dd>
+<dd><b><i>x</i></b><sub>moon</sub> = <b><i>x</i></b><sub>earth</sub> + <i>a</i><sub>moon</sub> (cos(<i>&theta;<sub></sub></i><sub>0 moon</sub> + <i>w</i><sub>moon</sub>(<i>t</i> - <i>t</i><sub>0</sub>)), sin(<i>&theta;<sub></sub></i><sub>0 moon</sub> + <i>w</i><sub>moon</sub>(<i>t</i> - <i>t</i><sub>0</sub>)))<sup>T</sup></dd>
+</dl>
+where <b><i>x</i></b> denotes position of the astronomical objects.
+</p>
+
+<p>
+<b style="color:red">Press the key 'v' on the applet, then you can see the dynamics in state spaces of velocity.</b><br>
+While only the above equations (Eq.1) are coded manually in this program,<br>
+JAutoDiff generates the derivative below (Eq.2) of (Eq.1) with respect to time <i>t</i>.<br>
+<dl>
+<dt>(Eq. 2)</dt>
+<dd><b><i>v</i></b><sub>sun</sub> = <b>0</b></dd>
+<dd><b><i>v</i></b><sub>earth</sub> = <b><i>v</i></b><sub>sun</sub> + <i>a</i><sub>earth</sub><i>w</i><sub>earth</sub> (-sin(<i>&theta;<sub></sub></i><sub>0 earth</sub> + <i>w</i><sub>earth</sub>(<i>t</i> - <i>t</i><sub>0</sub>)), cos(<i>&theta;<sub></sub></i><sub>0 earth</sub> + <i>w</i><sub>earth</sub>(<i>t</i> - <i>t</i><sub>0</sub>)))<sup>T</sup></dd>
+<dd><b><i>v</i></b><sub>moon</sub> = <b><i>v</i></b><sub>earth</sub> + <i>a</i><sub>moon</sub><i>w</i><sub>moon</sub> (-sin(<i>&theta;<sub></sub></i><sub>0 moon</sub> + <i>w</i><sub>moon</sub>(<i>t</i> - <i>t</i><sub>0</sub>)), cos(<i>&theta;<sub></sub></i><sub>0 moon</sub> + <i>w</i><sub>moon</sub>(<i>t</i> - <i>t</i><sub>0</sub>)))<sup>T</sup></dd>
+</dl>
+</p>
+
+ <p>
+ Actually, this program simulates the dynamics with initial condition such that<br>
+<i>&theta;</i><sub>0 earth</sub>=<i>&theta;</i><sub>0 moon</sub>=0 at an arbitrary time in the time interval <i>t</i><sub>0</sub> = [-50000.0, 50000.0] &sub; R.</br>
+The state variables <b><i>x</i></b>, <b><i>v</i></b> are computed as real interval vectors using interval arithmetics library 
+<a href="http://interval.sourceforge.net/interval/java/ia_math/README.html">ia_math</a>.<br>
+<b style="color:red">The rectangles in the applet show bounds of the state variables.</b><br>
+</p>
+</div>
+
+<div style="float:left; margin-right:30px">
+<applet 
+codebase="file:///Users/unureki/git/JAutoDiff/html/"
+code="nilgiri.planarSolarSystem.PlanarSolarSystemApplet.class" 
+archive="demo/pso/PlanarSolarSystemApplet.jar, lib/core.jar, lib/ecj.jar, lib/ia_math.jar" 
+width=500 height=500>
+</applet>
+</div>
+
+<div style="padding-top:10px">
+<ul>
+<li>t : Change mouse gesture mode into [Translation] of view.</li>
+<li>z : Change mouse gesture mode into [Zoom] of view.</li>
+<li>p : Show state space of [Position].</li>
+<li>v : Show state space of [Velocity].</li>
+<li>a : Show state space of [Acceleration].</li>
+<li>b : Draw bounds of state variables.</li>
+</ul>
+</div>
+
+</body>
+</html>
