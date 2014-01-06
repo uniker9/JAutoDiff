@@ -11,7 +11,7 @@ This library provides a framework to compute derivatives of functions
 on arbitrary types of [field](http://en.wikipedia.org/wiki/Field_\(mathematics\)) 
 using [generics](http://en.wikipedia.org/wiki/Generics_in_Java).
 
-
+This software is released under the MIT License, see LICENSE.txt.	
 
 # Sample : ADTest.java
 
