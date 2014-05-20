@@ -9,7 +9,7 @@ import nilgiri.math.DoubleRealFactory;
 
 public class ADTest {
 	private final DoubleRealFactory RNFactory = DoubleRealFactory.instance();
-	private final DifferentialRealFunctionFactory<DoubleReal> DFFactory = new DifferentialRealFunctionFactory<DoubleReal>(RNFactory);//, RFFactory);
+	private final DifferentialRealFunctionFactory<DoubleReal> DFFactory = new DifferentialRealFunctionFactory<DoubleReal>(RNFactory);
 
 	private void test(double i_expected, DifferentialFunction<DoubleReal> i_f){
 		String func_str = i_f.toString();
