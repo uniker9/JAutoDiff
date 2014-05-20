@@ -6,12 +6,10 @@ import org.junit.Test;
 import junit.framework.Assert;
 import nilgiri.math.DoubleReal;
 import nilgiri.math.DoubleRealFactory;
-import nilgiri.math.DoubleRealFunctionFactory;
 
 public class ADTest {
 	private final DoubleRealFactory RNFactory = DoubleRealFactory.instance();
-	private final DoubleRealFunctionFactory RFFactory = DoubleRealFunctionFactory.instance();
-	private final DifferentialRealFunctionFactory<DoubleReal> DFFactory = new DifferentialRealFunctionFactory<DoubleReal>(RNFactory, RFFactory);
+	private final DifferentialRealFunctionFactory<DoubleReal> DFFactory = new DifferentialRealFunctionFactory<DoubleReal>(RNFactory);//, RFFactory);
 
 	private void test(double i_expected, DifferentialFunction<DoubleReal> i_f){
 		String func_str = i_f.toString();
@@ -27,9 +25,9 @@ public class ADTest {
 		double vy = 5.0;
 		double vq = 8.0;
 
-		Variable<DoubleReal> x = DFFactory.variable("x", new DoubleReal(vx));
-		Variable<DoubleReal> y = DFFactory.variable("y", new DoubleReal(vy));
-		Constant<DoubleReal> q = DFFactory.constant(new DoubleReal(vq));
+		Variable<DoubleReal> x = DFFactory.var("x", new DoubleReal(vx));
+		Variable<DoubleReal> y = DFFactory.var("y", new DoubleReal(vy));
+		Constant<DoubleReal> q = DFFactory.val(new DoubleReal(vq));
 
 		//================================================================================
 		//Construct functions
