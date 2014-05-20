@@ -3,17 +3,16 @@ package nilgiri.math.autodiff;
 
 import junit.framework.Assert;
 
+
 import nilgiri.math.DoubleReal;
 import nilgiri.math.DoubleRealFactory;
-import nilgiri.math.DoubleRealFunctionFactory;
 
 import org.junit.Test;
 
 
 public class ADOperatorTest {
 	DoubleRealFactory RF = DoubleRealFactory.instance();
-	DoubleRealFunctionFactory RFF = DoubleRealFunctionFactory.instance();
-	DifferentialRealFunctionFactory<DoubleReal> DF = new DifferentialRealFunctionFactory<DoubleReal>(RF, RFF);
+	DifferentialRealFunctionFactory<DoubleReal> DF = new DifferentialRealFunctionFactory<DoubleReal>(RF);
 
 	
 	double value_x = 3.0;
@@ -22,10 +21,10 @@ public class ADOperatorTest {
 	double value_q = 9.0;
 	
 
-	Variable<DoubleReal> x = DF.variable("x", new DoubleReal(value_x));
-	Variable<DoubleReal> y = DF.variable("y", new DoubleReal(value_y));
-	Constant<DoubleReal> p = DF.constant(new DoubleReal(value_p));
-	Constant<DoubleReal> q = DF.constant(new DoubleReal(value_q));
+	Variable<DoubleReal> x = DF.var("x", new DoubleReal(value_x));
+	Variable<DoubleReal> y = DF.var("y", new DoubleReal(value_y));
+	Constant<DoubleReal> p = DF.val(new DoubleReal(value_p));
+	Constant<DoubleReal> q = DF.val(new DoubleReal(value_q));
 	
 	final DifferentialFunction<DoubleReal> ZERO = DF.zero();
 	final DifferentialFunction<DoubleReal> ONE = DF.one();
